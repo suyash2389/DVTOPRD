@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:reporterInput xmlns:tns="com.ibm.csi.npm.dvreportinput" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com.ibm.csi.npm.dvreportinput input.xsd ">
+  <tns:reporterId>10277</tns:reporterId>
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>ThresholdViolation1Table</tns:name>
+      <tns:type>table</tns:type>
+      <tns:adaptor>PVLcResourceOverThrTableAdaptor</tns:adaptor>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>ThresholdViolation1Mediator</tns:name>
+      <tns:type>rttMediator</tns:type>
+    </tns:mediator>
+    <tns:title>
+      <tns:name>ThresholdViolation1Title</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+</tns:reporterInput>

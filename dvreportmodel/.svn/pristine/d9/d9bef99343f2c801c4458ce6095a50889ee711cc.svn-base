@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:reporterInput xmlns:tns="com.ibm.csi.npm.dvreportinput"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="com.ibm.csi.npm.dvreportinput input.xsd ">
+	<tns:reporterId>25719</tns:reporterId>
+	
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>ResDistrib1Chart</tns:name>
+			<tns:type>chart</tns:type>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>ResDistrib1Mediator</tns:name>
+			<tns:type>resourceDistributionMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>ResDistrib1Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>		
+
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>GroupTimeSeries1Chart</tns:name>
+			<tns:type>chart</tns:type>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>GroupTimeSeries1Mediator</tns:name>
+			<tns:type>timeSeriesMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>GroupTimeSeries1Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>
+
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>ResDistrib2Chart</tns:name>
+			<tns:type>chart</tns:type>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>ResDistrib2Mediator</tns:name>
+			<tns:type>resourceDistributionMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>ResDistrib2Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>
+
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>GroupTimeSeries2Chart</tns:name>
+			<tns:type>chart</tns:type>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>GroupTimeSeries2Mediator</tns:name>
+			<tns:type>timeSeriesMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>GroupTimeSeries2Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>
+	
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>ResDistrib3Chart</tns:name>
+			<tns:type>chart</tns:type>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>ResDistrib3Mediator</tns:name>
+			<tns:type>resourceDistributionMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>ResDistrib3Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>
+	
+
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>GroupTimeSeries3Chart</tns:name>
+			<tns:type>chart</tns:type>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>GroupTimeSeries3Mediator</tns:name>
+			<tns:type>timeSeriesMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>GroupTimeSeries3Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>
+
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>TopN1Table</tns:name>
+			<tns:type>table</tns:type>
+			<tns:adaptor>PVLcSummaryTableAdaptor</tns:adaptor>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>TopN1Mediator</tns:name>
+			<tns:type>topnMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>TopN1Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>
+
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>ResDistrib4Chart</tns:name>
+			<tns:type>chart</tns:type>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>ResDistrib4Mediator</tns:name>
+			<tns:type>resourceDistributionMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>ResDistrib4Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>
+
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>GroupTimeSeries4Chart</tns:name>
+			<tns:type>chart</tns:type>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>GroupTimeSeries4Mediator</tns:name>
+			<tns:type>timeSeriesMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>GroupTimeSeries4Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>
+	
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>TopN2Table</tns:name>
+			<tns:type>table</tns:type>
+			<tns:adaptor>PVLcSummaryTableAdaptor</tns:adaptor>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>TopN2Mediator</tns:name>
+			<tns:type>topnMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>TopN2Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>
+
+
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>ResDistrib5Chart</tns:name>
+			<tns:type>chart</tns:type>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>ResDistrib5Mediator</tns:name>
+			<tns:type>resourceDistributionMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>ResDistrib5Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>
+
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>ResDistrib6Chart</tns:name>
+			<tns:type>chart</tns:type>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>ResDistrib6Mediator</tns:name>
+			<tns:type>resourceDistributionMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>ResDistrib6Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>
+
+	<tns:widgetConfigInput>
+		<tns:widget>
+			<tns:name>ResDistrib7Chart</tns:name>
+			<tns:type>chart</tns:type>
+		</tns:widget>
+		<tns:mediator>
+			<tns:name>ResDistrib7Mediator</tns:name>
+			<tns:type>resourceDistributionMediator</tns:type>
+		</tns:mediator>
+		<tns:title>
+			<tns:name>ResDistrib7Title</tns:name>
+		</tns:title>
+	</tns:widgetConfigInput>
+</tns:reporterInput>

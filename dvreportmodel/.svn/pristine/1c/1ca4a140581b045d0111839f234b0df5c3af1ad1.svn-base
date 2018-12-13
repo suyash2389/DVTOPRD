@@ -1,0 +1,44 @@
+TNPM Database Parameters:
+------------------------
+
+dbServerIP=10.200.17.55
+# IP address of your database server where proviso database is installed
+
+dbProductName=Oracle
+#dbProductName, should be Oracle or DB2 
+
+dbPort=1521
+# Port of database, by default it is 1521 for Oracle & 60000 for IBM DB2
+
+dbName=PV
+#
+
+dbUserName=PV_LOIS
+#
+
+dbUserPassword=PV
+#
+
+Tool Configurations:
+-------------------
+
+Mode=custom
+# Mode Can be custom or all. In custom mode give either reporterIDs or syleSheets.
+
+reporterIDs=14006
+# reporterIDs can be identified by resmgr command,
+resmgr -export app -colNames "dbIndex name"
+or by below SQL query
+ SELECT IDX_IND,STR_NAME FROM APP_DESC;
+
+syleSheets=
+# syleSheets can be 
+'PVLs_AP_8ResTimeSeries_w_Ratio.html','PVLs_AP_8ResTimeSeries.html','PVLs_AP_9ResTimeSeries.html',
+'PVLs_AP_GroupSummary_w_2ResDistrib.html','PVLs_AP_RankVariation.html','PVLs_AP_ResSummary_w_2Ratio.html',
+'PVLs_AP_ResSummary_w_2ResDistrib.html','PVLs_AP_ResSummary_w_GTS.html','PVLs_AP_ThresholdViolation.html',
+'PVLs_AP_TopN.html','PVLs_AP_Baseline.html','PVLs_AP_ResTimeSeries_Even.html','PVLs_AP_ResSummary_w_2GTS.html',
+'PVLsRatio_ResourcePlanningTable.html','PVLs1ChartDrilldown.html','PVLs_AP_Dashboard_5620SAM_Service.html',
+'PVLs_AP_Dashboard_5620SAM_Interface.html','PVLs_AP_Dashboard_5620SAM_MPLS.html','PVLs_AP_Dashboard_RV_MIB2.html',
+'PVLs_AP_Dashboard_Env.html','PVLs_AP_ResSummary_w_2GTS.html','PVLs_AP_3ResSummary_w_NoCharts.html',
+'PVLs_AP_ResSummary2_w_2ResDistrib.html','PVLs_AP_Dashboard.html','PVLs_AP_2GroupSummary_w_4ResDistrib.html',
+'PVLs_AP_GroupSummary_w_2GTS.html','PVLs_AP_2GroupSummary_w_2GTS.html','PVLs_AP_2ResSummary_w_4Ratio.html'

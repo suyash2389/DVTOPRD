@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:reporterInput xmlns:tns="com.ibm.csi.npm.dvreportinput" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com.ibm.csi.npm.dvreportinput input.xsd ">
+  <tns:reporterId>10268</tns:reporterId>
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>RankVariation1Table</tns:name>
+      <tns:type>table</tns:type>
+      <tns:adaptor>DVRankVariationTableAdaptor</tns:adaptor>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>RankVariation1Mediator</tns:name>
+      <tns:type>rankVariationMediator</tns:type>
+    </tns:mediator>
+    <tns:title>
+      <tns:name>RankVariation1Title</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>RankVariation1Chart</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>RankVariation1Mediator</tns:name>
+      <tns:type>rankVariationMediator</tns:type>
+    </tns:mediator>
+     <tns:title>
+      <tns:name>RankVariation1Title</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+</tns:reporterInput>

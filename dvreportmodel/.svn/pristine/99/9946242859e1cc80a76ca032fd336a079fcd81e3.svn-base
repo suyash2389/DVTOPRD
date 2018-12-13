@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/csi/npm/dvreportermodel"
+	xmlns:tns="http://www.ibm.com/csi/npm/dvreportermodel"
+	elementFormDefault="qualified">
+
+	<element name="formulaId" type="string"></element>
+	<complexType name="Reporter">
+		<sequence>
+			<element name="name" type="string"></element>
+			<element name="id" type="string"></element>
+			<element name="totalrows" type="int" maxOccurs="1" minOccurs="0"></element>
+			<element name="totalcols" type="int" maxOccurs="1" minOccurs="0"></element>
+			<element name="ReportWidget" type="tns:WidgetConfig"
+				maxOccurs="unbounded" minOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Widget">
+		<sequence>
+			<element name="storeName" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="widgetId" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="rowspan" type="int" maxOccurs="1" minOccurs="0"></element>
+			<element name="colspan" type="int" maxOccurs="1" minOccurs="0"></element>
+			<element name="xpos" type="int" maxOccurs="1" minOccurs="0"></element>
+			<element name="ypos" type="int" maxOccurs="1" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Mediator">
+		<sequence>
+			<element name="storeName" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="WidgetConfig">
+		<sequence>
+			<element name="mediator" type="tns:Mediator" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="widget" type="tns:Widget" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="title" type="tns:Title"></element>
+			<element name="storeUrl" type="string" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="storeName" type="string" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="widgetNumber" type="int"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Title">
+		<sequence>
+			<element name="text" type="string"></element>
+			<element name="link" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Hint">
+		<sequence>
+			<element name="text" type="string"></element>
+			<element name="link" type="string"></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="ChartMediator">
+		<complexContent>
+			<extension base="tns:Mediator">
+				<sequence>
+					<element name="metric" type="string"></element>
+					<element name="stats" type="string"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="TableMediator">
+		<complexContent>
+			<extension base="tns:Mediator">
+				<sequence>
+					<element name="formula" type="tns:TableMediatorFormula"
+						maxOccurs="unbounded" minOccurs="1">
+					</element>
+					<element name="sort" type="tns:TableMediatorSort"
+						maxOccurs="1" minOccurs="0">
+					</element>
+					<element name="removeEmptyRows" type="boolean" maxOccurs="1"
+						minOccurs="0"></element>
+					<element name="pageSize" type="int" maxOccurs="1"
+						minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="TableMediatorFormula">
+		<sequence>
+			<element name="metric" type="string"></element>
+			<element name="stats" maxOccurs="1" minOccurs="0" type="tns:Stats"></element>
+			<element ref="tns:formulaId"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="TableMediatorSort">
+		<sequence>
+			<element name="ascending" type="boolean"></element>
+			<element name="enable" type="boolean"></element>
+			<element name="orderBy" type="string"></element>
+			<element name="orderByRPTColumn" type="string"></element><!-- Changes added on 10/12/2015by Madhukar -->
+		</sequence>
+	</complexType>
+
+	<complexType name="Drilldown">
+		<sequence>
+			<element name="reporter" type="string"></element>
+			<element name="leaf" type="tns:LeafDrilldown" maxOccurs="1"
+				minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="TableWidget">
+		<complexContent>
+			<extension base="tns:Widget">
+				<sequence>
+					<element name="SumRow" type="tns:SumRow" maxOccurs="1"
+						minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="ChartWidget">
+		<complexContent>
+			<extension base="tns:Widget">
+				<sequence>
+					<element name="drilldown" type="tns:Drilldown" maxOccurs="1"
+						minOccurs="0"></element>
+					<element name="footer" type="string" maxOccurs="1"
+						minOccurs="0"></element>
+					<element name="title" type="string" maxOccurs="1"
+						minOccurs="0"></element>
+					<element name="chartStyle" type="int"></element>
+					<element name="autoResize" type="boolean" maxOccurs="1"
+						minOccurs="0"></element>
+					<element name="customLabels" type="tns:CustomLabels"
+						maxOccurs="1" minOccurs="0">
+					</element>
+					<element name="realTimeParameters" type="tns:RealTimeParameters"
+						maxOccurs="1" minOccurs="0">
+					</element>
+					<element name="realTimeSupport" type="boolean"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="CustomLabels">
+		<sequence>
+			<element name="metricsLabels" type="tns:ChartMetricLabel"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+			<element name="otherLabels" type="tns:ChartOtherLabel"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+			<element name="propertiesLabels" type="tns:ChartPropertiesLabel"
+				maxOccurs="unbounded" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ChartMetricLabel">
+		<sequence>
+			<element ref="tns:formulaId" maxOccurs="1" minOccurs="1"></element>
+			<element name="label" type="string" maxOccurs="1" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ChartOtherLabel">
+		<sequence>
+			<element name="name" type="string"></element>
+			<element name="label" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ChartPropertiesLabel">
+		<sequence>
+			<element name="propertiesId" type="string"></element>
+			<element name="label" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="RealTimeParameter">
+		<sequence>
+			<element name="name" type="string"></element>
+			<element name="value" type="string"></element>
+		</sequence>
+	</complexType>
+
+
+
+	<complexType name="ResDistribMediator">
+		<complexContent>
+			<extension base="tns:ChartMediator">
+				<sequence>
+					<element name="provideAllRanges" type="boolean"></element>
+					<element name="ranges" type="tns:ChartRange" maxOccurs="unbounded"
+						minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="ChartRange">
+		<sequence>
+			<element name="valueOver" type="float"></element>
+			<element name="valueUnder" type="float"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="GstTableMediator">
+		<complexContent>
+			<extension base="tns:TableMediator">
+				<sequence>
+					<element name="group" type="tns:TableMediatorGroup"
+						maxOccurs="1" minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="TableMediatorGroup">
+		<sequence>
+			<element name="filter" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="GstTableWidget">
+		<complexContent>
+			<extension base="tns:TableWidget">
+				<sequence>
+					<element name="formula" type="tns:TableFormulaWithTh"
+						maxOccurs="unbounded" minOccurs="0">
+					</element>
+					<element name="group" type="tns:TableGroup" maxOccurs="1"
+						minOccurs="0"></element>
+					<element name="chartErrorThresholdPercentage" type="int"
+						maxOccurs="1" minOccurs="0">
+					</element>
+					<element name="chartWarningThresholdPercentage" type="int"
+						maxOccurs="1" minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="SumRow">
+		<sequence>
+			<element name="noValueTag" type="string"></element>
+			<element name="display" type="tns:Display"></element>
+			<element name="label" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Display">
+		<sequence>
+			<element name="bottom" type="boolean"></element>
+			<element name="top" type="boolean"></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="MeticsFormat">
+		<sequence>
+			<element name="Setting" type="tns:Setting"></element>
+			<element name="FormatAs" type="string"></element>
+			<element name="label" type="string" maxOccurs="1" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Setting">
+		<sequence>
+			<element name="nbOfDigits" type="int"></element>
+			<element name="scalingFactor" type="string"></element>
+			<element name="useScientificNotationAbove" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="TableFormulaWithTh">
+		<complexContent>
+			<extension base="tns:TableFormula">
+				<sequence>
+					<element name="metricFormat" type="tns:MetricFormatWithTH">
+					</element>
+					<element name="drilldown" type="tns:Drilldown" maxOccurs="1"
+						minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="MetricFormatWithTH">
+		<complexContent>
+			<extension base="tns:MeticsFormat">
+				<sequence>
+					<element name="threshold" type="tns:Threshold" maxOccurs="1"
+						minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Threshold">
+		<sequence>
+			<element name="GroupBased" type="boolean"></element>
+			<element name="drilldown" type="tns:Drilldown" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="over" type="boolean"></element>
+			<element name="stats" type="string"></element>
+			<element name="timeSpan" type="string"></element>
+			<element name="value" type="tns:ThValue"></element>
+			<element name="violationType" type="tns:ViolationType"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ThValue">
+		<sequence>
+			<element name="critical" type="int"></element>
+			<element name="warning" type="int"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ViolationType">
+		<sequence>
+			<element name="baseline" type="boolean"></element>
+			<element name="burst" type="boolean"></element>
+			<element name="risk" type="boolean"></element>
+			<element name="period" type="boolean"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="TableGroup">
+		<sequence>
+			<element name="drilldown" type="tns:Drilldown" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="label" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="showResourceCount" type="boolean" maxOccurs="1"
+				minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+
+
+
+
+
+
+
+	<element name="reporter" type="tns:Reporter" nillable="false"></element>
+
+
+
+
+
+	<group name="NewGroupDefinition">
+		<sequence>
+			<element name="NewElement" type="string"></element>
+		</sequence>
+	</group>
+
+	<complexType name="RstTableMediator">
+		<complexContent>
+			<extension base="tns:TableMediator">
+				<sequence>
+					<element name="properties" type="tns:Properties" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="filter" type="string" maxOccurs="1"
+						minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+
+	<complexType name="Property">
+		<all>
+			<element name="propGrp" type="string"></element>
+			<element name="idIdx" type="int"></element>
+			<element name="name" type="string"></element>
+			<element name="label" type="string"></element>
+			<element name="edit" type="string"></element>
+			<element name="create" type="string"></element>
+			<element name="type" type="string"></element>
+			<element name="default" type="string"></element>
+		</all>
+	</complexType>
+
+	<complexType name="RstTableWidget">
+		<complexContent>
+			<extension base="tns:TableWidget">
+				<sequence>
+					<element name="formula" type="tns:TableFormulaWithoutTH"
+						maxOccurs="unbounded" minOccurs="1">
+					</element>
+					<element name="drilldown" type="tns:Drilldown" maxOccurs="1"
+						minOccurs="0"></element>
+					<element name="resource" type="tns:RSTTableResource"
+						maxOccurs="1" minOccurs="0">
+					</element>
+					<element name="headingStatsDisplay" type="boolean"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="TableFormulaWithoutTH">
+		<complexContent>
+			<extension base="tns:TableFormula">
+				<sequence>
+					<element name="formula" type="tns:MeticsFormat"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="RSTTableResource">
+		<sequence>
+			<element name="editName" type="boolean"></element>
+			<element name="Label" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="TableFormula">
+		<sequence>
+			<element name="statsLabel" type="string"></element>
+			<element ref="tns:formulaId"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="StackBarHorizWidget">
+		<complexContent>
+			<extension base="tns:ChartWidget"></extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="RealTimeParameters">
+		<sequence>
+			<element name="realTimeParameter" type="tns:RealTimeParameter"
+				maxOccurs="unbounded" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Properties">
+		<sequence>
+			<element name="property" type="tns:Property" maxOccurs="unbounded"
+				minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="TimeSeriesMediator">
+		<complexContent>
+			<extension base="tns:Mediator">
+				<sequence>
+					<element name="advGrpTimeSeries" type="string" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="multiResources" type="string" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="formula1ViolationType" type="string">
+					</element>
+					<element name="metricFromUrl" type="string" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="properties" type="string" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="statFromURL" type="string" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="reportPeriod" type="string"></element>
+					<element name="reportPeriodMultiplier" type="int"></element>
+					<element name="reportPeriodOffset" type="int"></element>
+					<element name="reportPeriodSliding" type="boolean">
+					</element>
+					<element name="busyHours" type="tns:BusyHours"></element>
+					<element name="trending" type="tns:Trending"></element>
+					<element name="granularity" type="tns:Granularity">
+					</element>
+					<element name="gtsNearRealTime" type="tns:GTSNearRealTime">
+					</element>
+					<element name="metric" type="string"></element>
+					<element name="stats" type="tns:Stats"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="BusyHours">
+		<sequence>
+			<element name="enable" type="boolean"></element>
+			<element name="stats" type="string" maxOccurs="1" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Trending">
+		<sequence>
+			<element name="trendingPeriodFromUrl" type="string"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="trendingPeriodSettings" type="string"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="displayTrend" type="string" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="upgradeCondition" type="tns:UpgradeCondition"
+				maxOccurs="1" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="UpgradeCondition">
+		<sequence>
+			<element name="baseProperty" type="string" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="multiplierProperty" type="string" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="default" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="ucFromURL" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Granularity">
+		<sequence>
+			<element name="months14" type="string"></element>
+			<element name="daily" type="string"></element>
+			<element name="monthly" type="string"></element>
+			<element name="quarterly" type="string"></element>
+			<element name="weekly" type="string"></element>
+			<element name="yearly" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="GTSNearRealTime">
+		<sequence>
+			<element name="RefreshRate" type="int"></element>
+			<element name="enable" type="boolean"></element>
+			<element name="secondsToWait" type="int"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="AreaChartWidget">
+		<complexContent>
+			<extension base="tns:ChartWidget"></extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="RatioMediator">
+		<complexContent>
+			<extension base="tns:ChartMediator">
+				<sequence>
+					<element name="groupRatio" type="boolean"></element>
+					<element name="metricFromUrl" type="string" maxOccurs="1"
+						minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="PieChartWidget">
+		<complexContent>
+			<extension base="tns:ChartWidget"></extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="ThViolationTableWidget">
+		<complexContent>
+			<extension base="tns:TableWidget">
+				<sequence>
+					<element name="drilldown" type="tns:Drilldown" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="metricFormat" type="tns:MeticsFormat">
+					</element>
+					<element name="statsLabels" type="string" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="propertiesLabels" type="string" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="metricsLabels" type="string" maxOccurs="1"
+						minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Stats">
+		<sequence>
+			<element name="stat" type="string" maxOccurs="unbounded"
+				minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="RttMediator">
+		<complexContent>
+			<extension base="tns:Mediator">
+				<sequence>
+					<element name="metrics" type="string"></element>
+					<element name="violationType" type="string"></element>
+					<element name="pageSize" type="int"></element>
+					<element name="properties" type="string"></element>
+					<element name="sort" type="tns:TableMediatorSort">
+					</element>
+					<element name="stats" type="string"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="TopNTable">
+		<complexContent>
+			<extension base="tns:TableWidget">
+				<sequence>
+					<element name="drilldown" type="tns:Drilldown"></element>
+					<element name="mainColumnLabel" type="string"></element>
+					<element name="metricFormat" type="tns:MeticsFormat">
+					</element>
+					<element name="statsLabels" type="string"></element>
+					<element name="propertiesLabels" type="string"></element>
+					<element name="metricsLabels" type="string"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+
+	<complexType name="TopNMediator">
+		<complexContent>
+			<extension base="tns:Mediator">
+				<sequence>
+					<element name="groupTOPN" type="boolean"></element>
+					<element name="handleRSE" type="boolean"></element>
+					<element name="metricFromUrl" type="string"></element>
+					<element name="metrics" type="string"></element>
+					<element name="numberOfResults" type="int"></element>
+					<element name="properties" type="string"></element>
+					<element name="relation" type="string"></element>
+					<element name="stats" type="tns:Stats" maxOccurs="1"
+						minOccurs="0"></element>
+					<element name="topRank" type="boolean"></element>
+					<element name="valueOver" type="tns:Value"></element>
+					<element name="valueUnder" type="tns:Value"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="RankVariationMediator">
+		<complexContent>
+			<extension base="tns:Mediator">
+				<sequence>
+					<element name="metrics" type="string"></element>
+					<element name="numberOfResults" type="int"></element>
+					<element name="stats" type="string"></element>
+					<element name="topRank" type="boolean"></element>
+					<element name="valueOver" type="tns:Value"></element>
+					<element name="valueUnder" type="tns:Value"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Value">
+		<sequence>
+			<element name="value" type="string"></element>
+			<element name="default" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="BarHorizWidget">
+		<complexContent>
+			<extension base="tns:ChartWidget"></extension>
+		</complexContent>
+	</complexType>
+	<complexType name="RankVariationChartWidget">
+		<complexContent>
+			<extension base="tns:ChartWidget"></extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="RankVariationTableWidget">
+		<complexContent>
+			<extension base="tns:TableWidget">
+				<sequence>
+					<element name="drilldown" type="tns:Drilldown"></element>
+					<element name="metricsLabels" type="string"></element>
+					<element name="statsLabels" type="string"></element>
+					<element name="resourceColumnLabel" type="string"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="BaselineChartWidget">
+		<complexContent>
+			<extension base="tns:ChartWidget"></extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="BaselineMediator">
+		<complexContent>
+			<extension base="tns:ChartMediator">
+				<sequence>
+					<element name="granularity" type="tns:Granularity"></element>
+					<element name="baseline" type="tns:Baseline"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Baseline">
+		<sequence>
+			<element name="periods" type="string"></element>
+			<element name="stats" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="MatrixMediator">
+		<complexContent>
+			<extension base="tns:Mediator">
+				<sequence>
+					<element name="sourceDestination" type="tns:SourceDestination"
+						maxOccurs="1" minOccurs="1">
+					</element>
+					<element name="formulas" type="tns:MatricMediatorFormula"
+						maxOccurs="unbounded" minOccurs="1">
+					</element>
+					<element name="matrixType" type="string" maxOccurs="1"
+						minOccurs="0"></element>
+					<element name="resourceFilters" type="string" maxOccurs="1"
+						minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="SourceDestination">
+		<sequence>
+			<element name="destinationProperty" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="destinationPropertyLabel" type="string"
+				maxOccurs="1" minOccurs="0"></element>
+			<element name="sourceProperty" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="sourcePropertyLabel" type="string" maxOccurs="1"
+				minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="MatricMediatorFormula">
+		<complexContent>
+			<extension base="tns:TableMediatorFormula">
+				<sequence>
+					<element name="sourceDestination" type="string" maxOccurs="1"
+						minOccurs="0"></element>
+					<element name="threshold" type="tns:MatrixMediatorThreshold"
+						maxOccurs="1" minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="MatrixMediatorThreshold">
+		<sequence>
+			<element name="criticalLevelProperty" type="string"></element>
+			<element name="default" type="string"></element>
+			<element name="over" type="boolean"></element>
+			<element name="percentOverUnder" type="int"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="MatrixTableWidget">
+		<complexContent>
+			<extension base="tns:Widget">
+				<sequence>
+					<element name="drilldown" type="tns:MatrixDrilldown"
+						maxOccurs="1" minOccurs="0">
+					</element>
+					<element name="firstCellLabels" type="string" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="rowColumnsLabels" type="string" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="rotate" type="boolean" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="formulas" type="tns:TableFormulaWithoutTH"
+						maxOccurs="unbounded" minOccurs="1">
+					</element>
+					<element name="cellFormat" type="string" maxOccurs="1"
+						minOccurs="0">
+					</element>
+					<element name="displayLegend" type="string" maxOccurs="1"
+						minOccurs="0"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="MatrixDrilldown">
+		<sequence>
+			<element name="fromColumnLabels" type="int" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="fromCells" type="int" maxOccurs="1" minOccurs="0"></element>
+			<element name="fromRowLabels" type="int" maxOccurs="1"
+				minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="LeafDrilldown">
+		<sequence>
+			<element name="reporter" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<!-- Changes added on 10/12/2015by Madhukar -->
+	<complexType name="RptTableMediator">
+		<complexContent>
+			<extension base="tns:Mediator">
+				<sequence>
+					<element name="forecastDate" type="tns:forcastDate"></element>
+					<element name="handleRSE" type="boolean"></element>
+					<element name="filter" type="string"></element>
+					<element name="metrics" type="string"></element>
+					<element name="properties" type="string"></element>
+					<element name="pagesize" type="int"></element>
+					<element name="stats" type="string"></element>
+					<element name="sort" type="tns:TableMediatorSort"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="forcastDate">
+		<sequence>
+			<element name="HistoricalTrendViewLimit" type="string"></element>
+			<element name="TrendingPeriodSettings" type="string"></element>
+			<element name="upgradeForcastCondition" type="tns:upgradeForcastCondition"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="upgradeForcastCondition">
+		<sequence>
+			<element name="BaseProperty" type="double"></element>
+			<element name="MultiplierProperty" type="double"></element>
+			<element name="default" type="double"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="RptTableWidget">
+		<complexContent>
+			<extension base="tns:TableWidget">
+				<sequence>
+					<element name="drilldown" type="tns:Drilldown"></element>
+					<element name="headings" type="string"></element>
+					<element name="metricDisplayPrevious" type="boolean"></element>
+					<element name="metricFormat" type="tns:MeticsFormat"></element>
+					<element name="metricsLabels" type="string"></element>
+					<element name="propertiesLabels" type="string"></element>
+					<element name="resourceLabels" type="string"></element>
+					<element name="statsLabels" type="string"></element>
+					<element name="upgradeConditionLabels" type="tns:upgradeConditionLabels"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="upgradeConditionLabels">
+		<sequence>
+			<element name="label" type="string"></element>
+			<element name="levelLabel" type="string"></element>
+			<element name="predictedDateLabel" type="string"></element>
+			<element name="ruleLabel" type="string"></element>
+			<element name="trendDirLabel" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="DistributionBarChartWidget">
+		<complexContent>
+			<extension base="tns:ChartWidget"></extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="StackAreaChartWidget">
+		<complexContent>
+			<extension base="tns:ChartWidget"></extension>
+		</complexContent>
+	</complexType>
+
+</schema>

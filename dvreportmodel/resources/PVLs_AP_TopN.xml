@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:reporterInput xmlns:tns="com.ibm.csi.npm.dvreportinput" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com.ibm.csi.npm.dvreportinput input.xsd ">
+  <tns:reporterId>10267</tns:reporterId>
+   <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>TopN1Table</tns:name>
+      <tns:type>table</tns:type>
+      <tns:adaptor>PVLcSummaryTableAdaptor</tns:adaptor>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>TopN1Mediator</tns:name>
+      <tns:type>topnMediator</tns:type>
+    </tns:mediator>
+    <tns:title>
+      <tns:name>TopN1Title</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>TopN1Chart</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>TopN1Mediator</tns:name>
+      <tns:type>topnMediator</tns:type>
+    </tns:mediator>
+  </tns:widgetConfigInput>
+  
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>TopN2Table</tns:name>
+      <tns:type>table</tns:type>
+      <tns:adaptor>PVLcSummaryTableAdaptor</tns:adaptor>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>TopN2Mediator</tns:name>
+      <tns:type>topnMediator</tns:type>
+    </tns:mediator>
+    <tns:title>
+      <tns:name>TopN2Title</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+ 
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>TopN2Chart</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>TopN2Mediator</tns:name>
+      <tns:type>topnMediator</tns:type>
+    </tns:mediator>
+  </tns:widgetConfigInput>
+  
+</tns:reporterInput>

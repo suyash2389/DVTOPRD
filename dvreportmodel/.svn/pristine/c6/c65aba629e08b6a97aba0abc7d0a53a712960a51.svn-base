@@ -1,0 +1,194 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.ibm.com/csi/npm/dashjson" 
+xmlns:tns="http://www.ibm.com/csi/npm/dashjson" elementFormDefault="qualified">
+
+    <complexType name="storeType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="filterbarType">
+    	<sequence>
+    		<element name="drilldown" type="string"></element>
+    		<element name="wherecondition" type="string"></element>
+    		<element name="vendor" type="string"></element>
+    		<element name="region" type="string"></element>
+    		<element name="granularity" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="widgettoolbarType">
+    	<sequence>
+    		<element name="isMaster" type="boolean"></element>
+    		<element name="chartFamily" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="title" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="plotType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="type" type="string"></element>
+    		<element name="gap" type="int"  maxOccurs="1" minOccurs="0"></element>
+    		<element name="minBarSize" type="int"  maxOccurs="1" minOccurs="0"></element>
+    		<element name="maxBarSize" type="int"  maxOccurs="1" minOccurs="0"></element>
+    		<element name="radius" type="int"  maxOccurs="1" minOccurs="0"></element>
+    		<element name="markers" type="boolean"  maxOccurs="1" minOccurs="0"></element>
+    		<element name="labels" type="boolean"  maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+   <complexType name="axisType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="title" type="string"></element>
+    		<element name="vertical" type="boolean" maxOccurs="1" minOccurs="0"></element> 
+    		<element name="titleOrientation" type="string"  maxOccurs="1" minOccurs="0"></element>
+    		<element name="maxLabelCharCount" type="int" maxOccurs="1" minOccurs="0"></element>
+    		<element name="includeZero" type="boolean"></element>
+    		<element name="minorTicks" type="boolean" maxOccurs="1" minOccurs="0"></element>
+    		<element name="microTicks" type="boolean" maxOccurs="1"	minOccurs="0"></element>
+    		<element name="minorLabels" type="boolean" maxOccurs="1" minOccurs="0"></element>
+    		<element name="labelSeries" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="fixUpper" type="string"  maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="seriesType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="plot" type="string"></element>
+    		<element name="store" type="string"></element>
+    		<element name="value" type="string"></element>
+    		<element name="label" type="string" maxOccurs="1"
+    			minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="chartIdentityType">
+    	<sequence>
+    		<element name="class" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="name" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="drilldowntype" type="string"></element>
+    		<element name="type" type="string"></element>
+    		<element name="parameter" type="string"></element>
+    		<element name="master" type="string" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="legendType">
+    	<sequence>
+    		<element name="type" type="string" default="interactive"></element>
+    		<element name="style" type="string" default="margin: 0 5px 0 5px;"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="widgetType">
+    	<sequence>
+    		<element name="id" type="string"></element>
+    		<element name="type" type="string"></element>
+    		<element name="rowspan" type="int" default="1"></element>
+    		<element name="colspan" type="int" default="1"></element>
+    		<element name="xpos" type="int"></element>
+    		<element name="ypos" type="int"></element>
+    		<element name="toolbar" type="tns:widgettoolbarType"></element>
+    		<element name="style" type="string"
+    			default="height: 160px;width:98.5%;">
+    		</element>
+    		<!-- <element name="properties" maxOccurs="1" minOccurs="0">
+    			<complexType>
+    				<sequence>
+    					<element name="property" type="tns:propertiesType" maxOccurs="unbounded" minOccurs="1"></element>
+    				</sequence>
+    			</complexType>
+    		</element> -->
+    		<element name="properties" type="tns:propertiesType"></element>
+    		
+    		<element name="columns" type="tns:columnType" maxOccurs="unbounded" minOccurs="1"></element>
+    		<element name="colorRangeId" type="string"
+    			default="tnpm7" maxOccurs="1" minOccurs="0">
+    		</element>
+    		<!-- <element name="plots" maxOccurs="1" minOccurs="0">
+    			<complexType>
+    				<sequence>
+    					<element name="plot" type="tns:plotType" maxOccurs="unbounded" minOccurs="1">	</element>
+    				</sequence>
+    			</complexType>
+    		</element> -->
+    		<element name="plots" type="tns:plotType" maxOccurs="unbounded" minOccurs="1">	</element>
+    		
+    		<!-- <element name="axes" maxOccurs="1" minOccurs="0">
+    			<complexType>
+    				<sequence>
+    					<element name="axis" type="tns:axisType"
+    						maxOccurs="unbounded" minOccurs="1">
+    					</element>
+    				</sequence>
+    			</complexType>
+    		</element> -->
+    		<element name="axes" type="tns:axisType" maxOccurs="unbounded" minOccurs="1"></element>
+    				
+    		<!-- <element name="series" maxOccurs="1" minOccurs="0">
+    			<complexType>
+    				<sequence>
+    					<element name="plotSeries" type="tns:seriesType"
+    						maxOccurs="unbounded" minOccurs="1">
+    					</element>
+
+    				</sequence>
+    			</complexType>
+    		</element> -->
+    		<element name="series" type="tns:seriesType" maxOccurs="unbounded" minOccurs="1"></element>
+    		
+    		<!-- <element name="chartIdentity">
+    			<complexType>
+    				<sequence>
+    					<element name="chartId"
+    						type="tns:chartIdentityType" maxOccurs="unbounded"
+    						minOccurs="1">
+    					</element>
+    				</sequence>
+    			</complexType>
+    		</element> -->
+    		<element name="chartIdentity" type="tns:chartIdentityType" maxOccurs="unbounded" minOccurs="1"></element>
+    		
+    		<element name="legend" type="tns:legendType" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="tooltip" type="boolean" default="true" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="dashboardType">
+    	<sequence>
+    		<element name="id" type="string" maxOccurs="1" minOccurs="1" default="Dashboard1" ></element>
+    		<element name="title" type="string" maxOccurs="1" minOccurs="1" default="Dashboard1" ></element>
+    		<element name="description" type="string" maxOccurs="1" minOccurs="1" default="Dashboard1"></element>
+    		<element name="totalrows" type="int" maxOccurs="1" minOccurs="1" default="2"></element>
+    		<element name="totalcols" type="int" maxOccurs="1" minOccurs="1" default="2"></element>
+    		<element name="stores" type="tns:storeType" maxOccurs="unbounded" minOccurs="1"></element>
+    		<element name="filterbar" type="tns:filterbarType" maxOccurs="1" minOccurs="1"></element>
+    		<element name="widgets" type="tns:widgetType" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="Dashboard" type="tns:dashboardType"></element>
+
+    <complexType name="propertiesType">
+    	<sequence>
+    		<element name="title" type="string"></element>
+    		<element name="primaryKey" type="string"></element>
+    		<element name="dataStore" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="columnType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="id" type="string"></element>
+    		<element name="field" type="string"></element>
+    	</sequence>
+    </complexType>
+</schema>

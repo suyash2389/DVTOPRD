@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dvr="http://www.ibm.com/csi/npm/dvreportermodel"
+	xmlns:tns="http://www.ibm.com/csi/npm/dashjson" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<xsl:template match="dvr:reporter">
+		<tns:Dashboard xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://www.ibm.com/csi/npm/dashjson file:D://dataview/DV2Dashboard/resources/DashJSON.xsd">
+			<tns:id>
+				<xsl:value-of select="./dvr:id" />
+			</tns:id>
+			<tns:title>
+				<xsl:value-of select="./dvr:name" />
+			</tns:title>
+			<tns:description>
+				<xsl:value-of select="./dvr:name" />
+			</tns:description>
+			<tns:totalrows><xsl:value-of select="./dvr:totalrows" /></tns:totalrows>
+			<tns:totalcols><xsl:value-of select="./dvr:totalcols" /></tns:totalcols>
+			<xsl:for-each select="dvr:ReportWidget/dvr:storeUrl">
+				<tns:stores>
+					<tns:name>
+						<xsl:value-of select="../dvr:storeName" />
+					</tns:name>
+					<tns:query>
+						<xsl:value-of select="."></xsl:value-of> <!-- TO DO should come from widgets -->
+					</tns:query>
+					<tns:Default>
+						<tns:tz>GMT</tns:tz>
+						<tns:subElmtID>0</tns:subElmtID>
+						<tns:subElmtGrpID>50503</tns:subElmtGrpID>
+						<tns:timeSpan>day</tns:timeSpan>
+						<tns:startTime>2015.11.09.00.00.00</tns:startTime>						
+					</tns:Default>
+					<tns:datasource>dashServlet</tns:datasource>
+				</tns:stores>
+			</xsl:for-each>
+
+			<tns:filterbar>
+				<tns:names>timePeriod</tns:names>
+				<tns:toolbarPageId>filterBar</tns:toolbarPageId>
+			</tns:filterbar>
+			<xsl:apply-templates />
+		</tns:Dashboard>
+	</xsl:template>
+
+	<xsl:template
+		match="dvr:ReportWidget[dvr:widget[@xsi:type='StackBarHorizWidget']]">
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Pie</tns:type><!-- TO DO - confirm value -->
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>false</tns:isMaster> <!-- TO DO -->
+				<tns:chartFamily>circular</tns:chartFamily>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title> <!-- TO DO -->
+			</tns:toolbar>
+			<tns:style>height: 200px;</tns:style>
+			<tns:colorRangeId>tnpm7</tns:colorRangeId>
+			<tns:plots>
+				<tns:radius>90</tns:radius>
+				<tns:markers>true</tns:markers>
+				<tns:labels>false</tns:labels>
+			</tns:plots>
+			<tns:plot1>
+			</tns:plot1>
+			<tns:series>
+				<tns:name>metricName</tns:name>
+				<tns:store>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:store>
+				<tns:value>item.resourceCount</tns:value><!-- TO DO -->
+				<tns:label>item.metricName</tns:label><!-- TO DO -->
+			</tns:series>
+			<tns:chartIdentity>
+				<!-- <tns:chartId> -->
+				<tns:name>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:name> <!-- TO DO JSON internal ID for widget? -->
+				<tns:drilldowntype>masterlistener</tns:drilldowntype> <!-- TO DO DV will need drill down to another dashboard -->
+				<tns:type>master</tns:type> <!-- TO DO is it manadatory? If so what all other values -->
+				<tns:parameter>resourceCount</tns:parameter>  <!-- For drill down to other report, need to pass Metric Range as parameter 
+					to next report -->
+				<!-- </tns:chartId> -->
+				<tns:targetDashboard><xsl:value-of select="./dvr:widget/dvr:drilldown/dvr:reporter" /></tns:targetDashboard>
+			</tns:chartIdentity>
+			<tns:legend>
+				<tns:type>interactive</tns:type>
+				<tns:style>margin: 10px;</tns:style>
+			</tns:legend>
+			<tns:tooltip>true</tns:tooltip>
+		</tns:widgets>
+	</xsl:template>
+	<xsl:template
+		match="dvr:ReportWidget[dvr:widget[@xsi:type='RankVariationChartWidget']]">
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Bar</tns:type>
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>false</tns:isMaster>
+				<tns:chartFamily>graphical</tns:chartFamily>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title>
+				<tns:navigation>true</tns:navigation>
+				<tns:showall>true</tns:showall>
+			</tns:toolbar>
+			<tns:style>height: 300px;</tns:style>
+			<tns:colorRangeId>tnpm7</tns:colorRangeId>
+			<tns:plots>
+				<tns:name>default</tns:name>
+				<tns:type>StackedBars</tns:type>
+				<tns:gap>3</tns:gap>
+				<tns:minBarSize>3</tns:minBarSize>
+				<tns:maxBarSize>20</tns:maxBarSize>
+			</tns:plots>
+			<tns:axes>
+				<tns:name>x</tns:name>
+				<tns:title>Name</tns:title>
+				<tns:titleOrientation>away</tns:titleOrientation>
+				<tns:includeZero>true</tns:includeZero>
+				<tns:minorTicks>false</tns:minorTicks>
+				<tns:microTicks>false</tns:microTicks>
+			</tns:axes>
+			<tns:axes>
+				<tns:name>y</tns:name>
+				<tns:title>Rank Variation</tns:title>
+				<tns:vertical>true</tns:vertical>
+				<tns:minorTicks>false</tns:minorTicks>
+				<tns:microTicks>false</tns:microTicks>
+				<tns:minorLabels>false</tns:minorLabels>
+				<tns:labelSeries>rankVariation</tns:labelSeries>
+			</tns:axes>
+			<tns:series>
+				<tns:name>rankVariation</tns:name>
+				<tns:plot>default</tns:plot>
+				<tns:store>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:store>
+				<tns:value>rankVariation</tns:value>
+				<tns:label>resourceName</tns:label>
+			</tns:series>
+			<tns:chartIdentity>
+				<tns:name>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:name>
+				<tns:drilldowntype>masterlistener</tns:drilldowntype>
+				<tns:type>master</tns:type>
+				<tns:parameter>resourceName</tns:parameter>
+			</tns:chartIdentity>
+			<tns:legend>
+				<tns:type>interactive</tns:type>
+				<tns:style>margin: 0 5px 0 5px;</tns:style>
+			</tns:legend>
+			<tns:tooltip>true</tns:tooltip>
+		</tns:widgets>
+	</xsl:template>
+
+	<xsl:template
+		match="dvr:ReportWidget[dvr:widget[@xsi:type='BarHorizWidget']]">
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Bar</tns:type>
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>false</tns:isMaster>
+				<tns:chartFamily>graphical</tns:chartFamily>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title>
+				<tns:navigation>true</tns:navigation>
+				<tns:showall>true</tns:showall>
+			</tns:toolbar>
+			<tns:style>height: 300px;</tns:style>
+			<tns:colorRangeId>tnpm7</tns:colorRangeId>
+			<tns:plots>
+				<tns:name>default</tns:name>
+				<tns:type>ClusteredBars</tns:type>
+				<tns:gap>3</tns:gap>
+				<tns:minBarSize>3</tns:minBarSize>
+				<tns:maxBarSize>20</tns:maxBarSize>
+			</tns:plots>
+			<tns:axes>
+				<tns:name>x</tns:name>
+				<tns:title></tns:title>
+				<tns:titleOrientation>away</tns:titleOrientation>
+				<tns:includeZero>true</tns:includeZero>
+				<tns:minorTicks>false</tns:minorTicks>
+				<tns:microTicks>false</tns:microTicks>
+			</tns:axes>
+			<tns:axes>
+				<tns:name>y</tns:name>
+				<tns:title></tns:title>
+				<tns:vertical>true</tns:vertical>
+				<tns:minorTicks>false</tns:minorTicks>
+				<tns:microTicks>false</tns:microTicks>
+				<tns:minorLabels>false</tns:minorLabels>
+				<xsl:for-each select="./dvr:mediator/dvr:stats/dvr:stat">
+					<tns:labelSeries>
+						<xsl:value-of select="." />
+					</tns:labelSeries>
+				</xsl:for-each>
+				
+				
+			</tns:axes>
+			<xsl:variable name="storeName" select="./dvr:storeName" />
+			<xsl:for-each select="./dvr:mediator/dvr:stats/dvr:stat">				
+				<tns:series>
+				<tns:name><xsl:value-of select="." /></tns:name>
+				<tns:plot>default</tns:plot>
+				<tns:store><xsl:value-of select="$storeName"/></tns:store>
+				<tns:value>item.<xsl:value-of select="." />	</tns:value>
+				<tns:label>item.resourceName</tns:label>
+				</tns:series>				
+			</xsl:for-each>		
+			
+			<tns:chartIdentity>
+				<tns:name>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:name>
+				<tns:drilldowntype>masterlistener</tns:drilldowntype>
+				<tns:type>master</tns:type>
+				<tns:parameter>resourceName</tns:parameter>
+				<tns:targetDashboard><xsl:value-of select="./dvr:widget/dvr:drilldown/dvr:reporter" /></tns:targetDashboard>
+			</tns:chartIdentity>
+			<tns:legend>
+				<tns:type>interactive</tns:type>
+				<tns:style>margin: 0 5px 0 5px;</tns:style>
+			</tns:legend>
+			<tns:tooltip>true</tns:tooltip>
+		</tns:widgets>
+	</xsl:template>
+	<!-- End of Top N Chart -->
+
+
+	<xsl:template
+		match="dvr:ReportWidget[dvr:mediator[@xsi:type='TimeSeriesMediator']]">
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>line</tns:type><!-- TO DO - confirm value -->
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>false</tns:isMaster> <!-- TO DO -->
+				<tns:chartFamily>discrete</tns:chartFamily>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title> <!-- TO DO -->
+			</tns:toolbar>
+			<tns:style>height: 200px;</tns:style>
+			<tns:colorRangeId>tnpm7</tns:colorRangeId>
+			<tns:dynamicseries>true</tns:dynamicseries>
+			<tns:plots>
+				<tns:name>default</tns:name>
+				<tns:type>Lines</tns:type>
+				<tns:gap>3</tns:gap>
+				<tns:minBarSize>3</tns:minBarSize>
+				<tns:maxBarSize>20</tns:maxBarSize>
+				<tns:markers>true</tns:markers>
+				<tns:labels>false</tns:labels>
+				
+			</tns:plots>
+			<tns:axes>
+				<tns:name>x</tns:name>
+				<tns:title>Date</tns:title>
+				<tns:titleOrientation>away</tns:titleOrientation>
+				<tns:includeZero>true</tns:includeZero>
+				<tns:minorTicks>false</tns:minorTicks>
+				<tns:microTicks>false</tns:microTicks>
+				<tns:rotation>-30</tns:rotation>				
+				<tns:labelSeries><xsl:value-of select="./dvr:title/dvr:text" /></tns:labelSeries>				
+			</tns:axes>
+			<tns:axes>
+				<tns:name>y</tns:name>
+				<tns:title>			
+				</tns:title>
+				<tns:vertical>true</tns:vertical>
+				<tns:includeZero>true</tns:includeZero>				
+				<tns:minorTicks>true</tns:minorTicks>
+				<tns:microTicks>false</tns:microTicks>
+				<tns:minorLabels>false</tns:minorLabels>				
+				<!--  <tns:labelSeries>
+					<xsl:value-of select="./dvr:mediator/dvr:stats" />
+				</tns:labelSeries>
+				-->
+			</tns:axes>
+			<!-- 
+			<xsl:variable name="storeName" select="./dvr:storeName" />
+			<xsl:for-each select="./dvr:mediator/dvr:stats/dvr:stat">				
+				<tns:series>
+				<tns:name><xsl:value-of select="../../../dvr:title/dvr:text" />:<xsl:value-of select="." /></tns:name>
+				<tns:plot>default</tns:plot>
+				<tns:store><xsl:value-of select="$storeName"/></tns:store>
+				<tns:value>item.value</tns:value>
+				<tns:label>(new Date(item.date)).toGMTString()</tns:label>
+				</tns:series>				
+			</xsl:for-each>		
+			-->
+		
+			<tns:series>
+				<tns:name><xsl:value-of select="./dvr:title/dvr:text" /></tns:name>				
+				<tns:store>
+					<xsl:value-of select="./dvr:storeName"/>
+				</tns:store>
+				<tns:value>item.value</tns:value>				
+				<tns:seriesColumn>item.metricName</tns:seriesColumn>
+				<tns:labelColumn>item.date</tns:labelColumn>
+			</tns:series>
+			
+			<tns:chartIdentity>
+				<!-- <tns:chartId> -->
+				<tns:name>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:name>
+				<tns:type>master</tns:type>
+				<tns:parameter>resourceName</tns:parameter>
+				<!-- </tns:chartId> -->
+			</tns:chartIdentity>
+			<tns:legend>
+				<tns:type>interactive</tns:type>
+				<tns:style>margin: 10px;</tns:style>
+			</tns:legend>
+			<tns:tooltip>true</tns:tooltip>
+		</tns:widgets>
+	</xsl:template>
+	<xsl:template
+		match="dvr:ReportWidget[dvr:widget[@xsi:type='PieChartWidget']]">
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Pie</tns:type>
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>false</tns:isMaster>
+				<tns:chartFamily>circular</tns:chartFamily>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title>
+			</tns:toolbar>
+			<tns:style>height: 200px;</tns:style>
+			<tns:colorRangeId>tnpm7</tns:colorRangeId>
+			<tns:plots>
+				<tns:radius>90</tns:radius>
+				<tns:markers>true</tns:markers>
+				<tns:labels>false</tns:labels>
+			</tns:plots>
+			<tns:series>
+				<tns:name>metricName</tns:name>
+				<tns:store>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:store>
+				<tns:value>item.value</tns:value>
+				<tns:label>item.metricName</tns:label>
+			</tns:series>
+			<tns:chartIdentity>
+				<tns:name>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:name>
+				<tns:drilldowntype>masterlistener</tns:drilldowntype>
+				<tns:type>master</tns:type>
+				<tns:parameter>value</tns:parameter>
+			</tns:chartIdentity>
+			<tns:legend>
+				<tns:type>interactive</tns:type>
+				<tns:style>margin: 10px;</tns:style>
+			</tns:legend>
+			<tns:tooltip>true</tns:tooltip>
+		</tns:widgets>
+	</xsl:template>
+	<xsl:template match="dvr:ReportWidget[dvr:widget[@xsi:type='BaselineChartWidget']]">
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Columns</tns:type>
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>false</tns:isMaster>
+				<tns:chartFamily>graphical</tns:chartFamily>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title>
+				<tns:navigation>true</tns:navigation>
+				<tns:showall>true</tns:showall>
+			</tns:toolbar>
+			<tns:style>height: 300px;</tns:style>
+			<tns:colorRangeId>tnpm7</tns:colorRangeId>
+			<tns:dynamicseries>true</tns:dynamicseries>
+			<tns:plots>
+				<tns:name>default</tns:name>
+				<tns:type>Columns</tns:type>
+				<tns:gap>3</tns:gap>
+				<tns:minBarSize>3</tns:minBarSize>
+				<tns:maxBarSize>20</tns:maxBarSize>
+			</tns:plots>
+			<tns:plots>
+				<tns:name>other</tns:name>
+				<tns:type>Lines</tns:type>
+				<tns:gap>3</tns:gap>
+				<tns:markers>true</tns:markers>
+			</tns:plots>
+			<tns:axes>
+				<tns:name>x</tns:name>
+				<tns:title>Date</tns:title>
+				<tns:titleOrientation>away</tns:titleOrientation>
+				<tns:includeZero>true</tns:includeZero>
+				<tns:minorTicks>false</tns:minorTicks>
+				<tns:microTicks>false</tns:microTicks>
+				<tns:minorLabels>false</tns:minorLabels>
+				<tns:labelSeries>value</tns:labelSeries>
+			</tns:axes>
+			<tns:axes>
+				<tns:name>y</tns:name>
+				<tns:title>Value</tns:title>
+				<tns:vertical>true</tns:vertical>
+				<tns:includeZero>true</tns:includeZero>
+				<tns:minorTicks>false</tns:minorTicks>
+				<tns:microTicks>false</tns:microTicks>
+			</tns:axes>
+			<tns:series>
+				<tns:name>value</tns:name>
+				<tns:plot>default</tns:plot>
+				<tns:store>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:store>
+				<tns:value>item.value</tns:value>
+				<tns:seriesColumn>item.metricName</tns:seriesColumn>
+				<tns:labelColumn>item.date</tns:labelColumn>
+			</tns:series>
+			<tns:series>
+				<tns:name>value</tns:name>
+				<tns:plot>other</tns:plot>
+				<tns:store>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:store>
+				<tns:value>item.resourceName</tns:value>
+				<tns:seriesColumn>item.metricName</tns:seriesColumn>
+				<tns:labelColumn>item.date</tns:labelColumn>
+			</tns:series>
+			<tns:chartIdentity>
+				<tns:name>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:name>
+				<tns:drilldowntype>masterlistener</tns:drilldowntype>
+				<tns:type>master</tns:type>
+				<tns:parameter>date</tns:parameter>
+			</tns:chartIdentity>
+			<tns:legend>
+				<tns:type>interactive</tns:type>
+				<tns:style>margin: 0 5px 0 5px;</tns:style>
+			</tns:legend>
+			<tns:tooltip>true</tns:tooltip>
+		</tns:widgets>
+	</xsl:template>
+
+	<xsl:template
+		match="dvr:ReportWidget[dvr:widget[@xsi:type='GstTableWidget']]">
+		<!-- Handle GSTTable nodes here - can refer to mediator and widget child 
+			in source -->
+
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Grid</tns:type>
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>true</tns:isMaster>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title>
+			</tns:toolbar>
+			<tns:style>height: 300px;</tns:style>
+			<tns:properties>
+				<!-- <tns:property> -->
+				<tns:title></tns:title>
+				<tns:primaryKey>groupName</tns:primaryKey>
+				<tns:dataStore>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:dataStore>
+				<!-- </tns:property> -->
+			</tns:properties>
+			<xsl:variable name="groupLabel" select="dvr:widget/dvr:group/dvr:label" />
+			<tns:columns>
+				<tns:name>
+					<xsl:value-of select="$groupLabel" />
+				</tns:name>
+				<tns:id>groupName</tns:id>
+				<tns:field>groupName</tns:field>
+			</tns:columns>
+
+			<xsl:for-each select="dvr:widget/dvr:formula">
+				<xsl:variable name="columnLabel" select="dvr:metricFormat/dvr:label/text()" />
+				<xsl:for-each
+					select="../../dvr:mediator/dvr:formula[dvr:formulaId/text()=current()/dvr:formulaId/text()]/dvr:stats/dvr:stat">
+					<xsl:variable name="metricId" select="../../dvr:metric/text()" />
+					<xsl:variable name="statName" select="./text()" />
+					<xsl:variable name="fieldName" select="concat($metricId,':',./text())" />
+					<tns:columns>
+						<tns:name>
+							<xsl:value-of select="concat($columnLabel,'-',$statName)" />
+						</tns:name>
+						<tns:id>
+							<xsl:value-of select="$fieldName" />
+						</tns:id>
+						<tns:field>
+							<xsl:value-of select="$fieldName" />
+						</tns:field>
+					</tns:columns>
+				</xsl:for-each>
+			</xsl:for-each>
+			<tns:chartIdentity>
+				<!-- <tns:chartId> -->
+				<tns:class>grid</tns:class>
+				<tns:drilldowntype>master</tns:drilldowntype>
+				<tns:type>listener</tns:type>
+				<tns:parameter>drilldownParam</tns:parameter>
+				<tns:master>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:master>
+				<!-- </tns:chartId> -->
+			</tns:chartIdentity>
+		</tns:widgets>
+
+	</xsl:template>
+
+	<xsl:template
+		match="dvr:ReportWidget[dvr:widget[@xsi:type='RstTableWidget']]">
+
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Grid</tns:type>
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>true</tns:isMaster>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title>
+			</tns:toolbar>
+			<tns:style>height: 300px;</tns:style>
+			<tns:properties>
+				<!-- <tns:property> -->
+				<tns:title></tns:title>
+				<tns:primaryKey>resourceName</tns:primaryKey>
+				<tns:dataStore>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:dataStore>
+				<!-- </tns:property> -->
+			</tns:properties>
+			<xsl:variable name="resourceLabel" select="./dvr:widget/dvr:resource/dvr:Label" />
+			<tns:columns>
+				<tns:name>
+					<xsl:value-of select="$resourceLabel" />
+				</tns:name>
+				<tns:id>resourceName</tns:id>
+				<tns:field>resourceName</tns:field>
+			</tns:columns>
+			<xsl:for-each select="./dvr:mediator/dvr:properties/dvr:property">
+				<xsl:variable name="propertyId" select="./dvr:idIdx" />
+				<xsl:variable name="PropFieldName" select="concat($propertyId,':value')" />
+				<tns:columns>
+					<tns:name>
+						<xsl:value-of select="./dvr:label" />
+					</tns:name>
+					<tns:id>
+						<xsl:value-of select="$PropFieldName" />
+					</tns:id>
+					<tns:field>
+						<xsl:value-of select="$PropFieldName" />
+					</tns:field>
+				</tns:columns>
+			</xsl:for-each>
+
+			<xsl:for-each select="dvr:widget/dvr:formula">
+				<xsl:variable name="columnLabel" select="dvr:formula/dvr:label/text()" />
+				<xsl:for-each
+					select="../../dvr:mediator/dvr:formula[dvr:formulaId/text()=current()/dvr:formulaId/text()]/dvr:stats/dvr:stat">
+					<xsl:variable name="metricId" select="../../dvr:metric/text()" />
+					<xsl:variable name="statName" select="./text()" />
+					<xsl:variable name="fieldName" select="concat($metricId,':',./text())" />
+					<tns:columns>
+						<tns:name>
+							<xsl:value-of select="concat($columnLabel,'-',$statName)" />
+						</tns:name>
+						<tns:id>
+							<xsl:value-of select="$fieldName" />
+						</tns:id>
+						<tns:field>
+							<xsl:value-of select="$fieldName" />
+						</tns:field>
+					</tns:columns>
+				</xsl:for-each>
+			</xsl:for-each>
+			<tns:chartIdentity>
+				<!-- <tns:chartId> -->
+				<tns:class>grid</tns:class>
+				<tns:drilldowntype>master</tns:drilldowntype>
+				<tns:type>listener</tns:type>
+				<tns:parameter>drilldownParam</tns:parameter>
+				<tns:master>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:master>
+				<!-- </tns:chartId> -->
+				<tns:targetDashboard><xsl:value-of select="./dvr:widget/dvr:drilldown/dvr:reporter" /></tns:targetDashboard>
+			
+			</tns:chartIdentity>
+		</tns:widgets>
+
+	</xsl:template>
+
+
+	<xsl:template
+		match="dvr:ReportWidget[dvr:widget[@xsi:type='RankVariationTableWidget']]">
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Grid</tns:type>
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>true</tns:isMaster>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title>
+			</tns:toolbar>
+			<tns:style>height: 300px;</tns:style>
+			<tns:properties>
+				<!-- <tns:property> -->
+				<tns:title></tns:title>
+				<tns:primaryKey>resourceName</tns:primaryKey>
+				<tns:dataStore>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:dataStore>
+				<!-- </tns:property> -->
+			</tns:properties>
+			<tns:columns>
+				<tns:name>
+					<xsl:value-of select="./dvr:widget/dvr:resourceColumnLabel" />
+				</tns:name>
+				<tns:id>resourceName</tns:id>
+				<tns:field>resourceName</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>Rank Variation</tns:name>
+				<tns:id>rankVariation</tns:id>
+				<tns:field>rankVariation</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>Previous Rank</tns:name>
+				<tns:id>rankPreviousTP</tns:id>
+				<tns:field>rankPreviousTP</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>Current Rank</tns:name>
+				<tns:id>rankCurrentTP</tns:id>
+				<tns:field>rankCurrentTP</tns:field>
+			</tns:columns>
+
+			<tns:chartIdentity>
+				<!-- <tns:chartId> -->
+				<tns:class>grid</tns:class>
+				<tns:drilldowntype>master</tns:drilldowntype>
+				<tns:type>listener</tns:type>
+				<tns:parameter>drilldownParam</tns:parameter>
+				<tns:master>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:master>
+				<!-- </tns:chartId> -->
+			</tns:chartIdentity>
+		</tns:widgets>
+
+	</xsl:template>
+
+	<xsl:template match="dvr:ReportWidget[dvr:widget[@xsi:type='TopNTable']]">
+		<!-- Handle GSTTable nodes here - can refer to mediator and widget child 
+			in source -->
+
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Grid</tns:type>
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>true</tns:isMaster>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title>
+			</tns:toolbar>
+			<tns:style>height: 300px;</tns:style>
+			<tns:properties>
+				<!-- <tns:property> -->
+				<tns:title></tns:title>
+				<tns:primaryKey>resourceName</tns:primaryKey>
+				<tns:dataStore>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:dataStore>
+				<!-- </tns:property> -->
+			</tns:properties>
+			<tns:columns>
+				<tns:name>Name</tns:name>
+				<tns:id>resourceName</tns:id>
+				<tns:field>resourceName</tns:field>
+			</tns:columns>
+
+			<xsl:for-each select="./dvr:mediator/dvr:stats/dvr:stat">
+				<tns:columns>
+					<tns:name>
+						<xsl:value-of select="." />
+					</tns:name>
+					<tns:id>
+						<xsl:value-of select="." />
+					</tns:id>
+					<tns:field>
+						<xsl:value-of select="." />
+					</tns:field>
+				</tns:columns>
+			</xsl:for-each>
+
+
+			<tns:chartIdentity>
+				<!-- <tns:chartId> -->
+				<tns:class>grid</tns:class>
+				<tns:drilldowntype>master</tns:drilldowntype>
+				<tns:type>listener</tns:type>
+				<tns:parameter>drilldownParam</tns:parameter>
+				<tns:targetDashboard><xsl:value-of select="./dvr:widget/dvr:group/dvr:drilldown/dvr:reporter" /></tns:targetDashboard>
+			
+				<tns:master>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:master>
+				<!-- </tns:chartId> -->
+			</tns:chartIdentity>
+		</tns:widgets>
+
+	</xsl:template>
+
+	<xsl:template
+		match="dvr:ReportWidget[dvr:widget[@xsi:type='MatrixTableWidget']]">
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Grid</tns:type>
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>true</tns:isMaster>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title>
+			</tns:toolbar>
+			<tns:style>height: 300px;</tns:style>
+			<tns:properties>
+				<!-- <tns:property> -->
+				<tns:title></tns:title>
+				<tns:primaryKey>resourceName</tns:primaryKey>
+				<tns:dataStore>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:dataStore>
+				<!-- </tns:property> -->
+			</tns:properties>
+			<!-- TO DO Proper column field mapping -->
+			<tns:columns>
+				<tns:name></tns:name>
+				<tns:id>rowLabel</tns:id>
+				<tns:field>rowLabel</tns:field>
+			</tns:columns>
+
+			<tns:columns>
+				<tns:name>
+					<xsl:value-of
+						select="./dvr:mediator/dvr:sourceDestination/dvr:sourcePropertyLabel" />
+				</tns:name>
+				<tns:id>
+					<xsl:value-of
+						select="./dvr:mediator/dvr:sourceDestination/dvr:sourcePropertyLabel" />
+				</tns:id>
+				<tns:field>
+					<xsl:value-of
+						select="./dvr:mediator/dvr:sourceDestination/dvr:sourcePropertyLabel" />
+				</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>
+					<xsl:value-of
+						select="./dvr:mediator/dvr:sourceDestination/dvr:destinationPropertyLabel" />
+				</tns:name>
+				<tns:id>
+					<xsl:value-of
+						select="./dvr:mediator/dvr:sourceDestination/dvr:destinationPropertyLabel" />
+				</tns:id>
+				<tns:field>
+					<xsl:value-of
+						select="./dvr:mediator/dvr:sourceDestination/dvr:destinationPropertyLabel" />
+				</tns:field>
+			</tns:columns>
+
+
+			<tns:chartIdentity>
+				<!-- <tns:chartId> -->
+				<tns:class>grid</tns:class>
+				<tns:drilldowntype>master</tns:drilldowntype>
+				<tns:type>listener</tns:type>
+				<tns:parameter>drilldownParam</tns:parameter>
+				<tns:master>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:master>
+				<!-- </tns:chartId> -->
+			</tns:chartIdentity>
+		</tns:widgets>
+	</xsl:template>
+
+
+
+	<xsl:template
+		match="dvr:ReportWidget[dvr:widget[@xsi:type='ThViolationTableWidget']]">
+		<!-- Handle GSTTable nodes here - can refer to mediator and widget child 
+			in source -->
+
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Grid</tns:type>
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>true</tns:isMaster>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title>
+			</tns:toolbar>
+			<tns:style>height: 300px;</tns:style>
+			<tns:properties>
+				<!-- <tns:property> -->
+				<tns:title></tns:title>
+				<tns:primaryKey>resourceName</tns:primaryKey>
+				<tns:dataStore>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:dataStore>
+				<!-- </tns:property> -->
+			</tns:properties>
+			<tns:columns>
+				<tns:name>Name</tns:name>
+				<tns:id>resourceName</tns:id>
+				<tns:field>resourceName</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>Thr Level</tns:name>
+				<tns:id>thrLevel</tns:id>
+				<tns:field>thrLevel</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>SLA Time Limit(hrs:mins)</tns:name>
+				<tns:id>thrDuration</tns:id>
+				<tns:field>thrDuration</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>Pecent of value over Threshold</tns:name>
+				<tns:id>maxOverPercentage</tns:id>
+				<tns:field>maxOverPercentage * 100</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>Threshold Vialotions</tns:name>
+				<tns:id>thrCount</tns:id>
+				<tns:field>thrCount</tns:field>
+			</tns:columns>
+			<xsl:call-template name="commaSeparatorValues">
+				<xsl:with-param name="strValue" select="./dvr:mediator/dvr:stats" />
+			</xsl:call-template>
+			<tns:chartIdentity>
+				<!-- <tns:chartId> -->
+				<tns:class>grid</tns:class>
+				<tns:drilldowntype>master</tns:drilldowntype>
+				<tns:type>listener</tns:type>
+				<tns:parameter>drilldownParam</tns:parameter>
+				<tns:master>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:master>
+				<!-- </tns:chartId> -->
+			</tns:chartIdentity>
+		</tns:widgets>
+
+	</xsl:template>
+
+	<!-- Added changes  by Madhukar on 10/12/2015 -->
+	<xsl:template
+		match="dvr:ReportWidget[dvr:widget[@xsi:type='DistributionBarChartWidget']]">
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Pie</tns:type><!-- TO DO - confirm value -->
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>false</tns:isMaster> <!-- TO DO -->
+				<tns:chartFamily>circular</tns:chartFamily>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title> <!-- TO DO -->
+			</tns:toolbar>
+			<tns:style>height: 200px;</tns:style>
+			<tns:colorRangeId>tnpm7</tns:colorRangeId>
+			<tns:plots>
+				<tns:radius>90</tns:radius>
+				<tns:markers>true</tns:markers>
+				<tns:labels>false</tns:labels>
+			</tns:plots>
+			<tns:series>
+				<tns:name>metricName</tns:name>
+				<tns:store>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:store>
+				<tns:value>item.resourceCount</tns:value><!-- TO DO -->
+				<tns:label>item.metricName</tns:label><!-- TO DO -->
+			</tns:series>
+			<tns:chartIdentity>
+				<!-- <tns:chartId> -->
+				<tns:name>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:name> <!-- TO DO JSON internal ID for widget? -->
+				<tns:drilldowntype>masterlistener</tns:drilldowntype> <!-- TO DO DV will need drill down to another dashboard -->
+				<tns:type>master</tns:type> <!-- TO DO is it manadatory? If so what all other values -->
+				<tns:parameter>resourceCount</tns:parameter>  <!-- For drill down to other report, need to pass Metric Range as parameter 
+					to next report -->
+				<!-- </tns:chartId> -->
+				<tns:targetDashboard><xsl:value-of select="./dvr:widget/dvr:drilldown/dvr:reporter" /></tns:targetDashboard>
+			
+			</tns:chartIdentity>
+			<tns:legend>
+				<tns:type>interactive</tns:type>
+				<tns:style>margin: 10px;</tns:style>
+			</tns:legend>
+			<tns:tooltip>true</tns:tooltip>
+		</tns:widgets>
+	</xsl:template>
+
+	<xsl:template
+		match="dvr:ReportWidget[dvr:widget[@xsi:type='RptTableWidget']]">
+		<!-- Handle GSTTable nodes here - can refer to mediator and widget child 
+			in source -->
+
+		<tns:widgets>
+			<tns:id>
+				<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+			</tns:id>
+			<tns:type>Grid</tns:type>
+			<tns:rowspan><xsl:value-of select="./dvr:widget/dvr:rowspan" /></tns:rowspan>
+			<tns:colspan><xsl:value-of select="./dvr:widget/dvr:colspan" /></tns:colspan>
+			<tns:xpos><xsl:value-of select="./dvr:widget/dvr:xpos" /></tns:xpos> 
+			<tns:ypos><xsl:value-of select="./dvr:widget/dvr:ypos" /></tns:ypos>
+			<tns:toolbar>
+				<tns:isMaster>true</tns:isMaster>
+				<tns:title>
+					<xsl:value-of select="./dvr:title/dvr:text" />
+				</tns:title>
+			</tns:toolbar>
+			<tns:style>height: 300px;</tns:style>
+			<tns:properties>
+				<!-- <tns:property> -->
+				<tns:title></tns:title>
+				<tns:primaryKey>groupName</tns:primaryKey>
+				<tns:dataStore>
+					<xsl:value-of select="./dvr:storeName" />
+				</tns:dataStore>
+				<!-- </tns:property> -->
+			</tns:properties>
+			<tns:columns>
+				<tns:name>Name</tns:name>
+				<tns:id>resourceName</tns:id>
+				<tns:field>resourceName</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>Upgrade Level</tns:name>
+				<tns:id>plevel</tns:id>
+				<tns:field>plevel</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name><xsl:value-of select="./dvr:widget/dvr:metricFormat/dvr:label" /> </tns:name>
+				<!-- - <xsl:value-of select="./dvr:mediator/dvr:stats" /> -->
+				<tns:id>mId94601-value</tns:id>
+				<tns:field>mId94601-value</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>Upgrade Rule</tns:name>
+				<tns:id>prule</tns:id>
+				<tns:field>prule</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>Upgrade Condition</tns:name>
+				<tns:id>upgradeCondition</tns:id>
+				<tns:field>upgradeCondition</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>Predicted Upgrade</tns:name>
+				<tns:id>preUpgradeDate</tns:id>
+				<tns:field>preUpgradeDate</tns:field>
+			</tns:columns>
+			<tns:columns>
+				<tns:name>Trend</tns:name>
+				<tns:id>trend</tns:id>
+				<tns:field>trend</tns:field>
+			</tns:columns>
+			<tns:chartIdentity>
+				<!-- <tns:chartId> -->
+				<tns:class>grid</tns:class>
+				<tns:drilldowntype>master</tns:drilldowntype>
+				<tns:type>listener</tns:type>
+				<tns:parameter>drilldownParam</tns:parameter>
+				<tns:targetDashboard><xsl:value-of select="./dvr:widget/dvr:drilldown/dvr:reporter" /></tns:targetDashboard>
+				<tns:master>
+					<xsl:value-of select="./dvr:widget/dvr:widgetId" />
+				</tns:master>
+				
+				<!-- </tns:chartId> -->
+			</tns:chartIdentity>
+		</tns:widgets>
+
+	</xsl:template>
+	
+	<!-- end of changes  by Madhukar on 10/12/2015 -->
+	
+	<xsl:template name="commaSeparatorValues">
+		<xsl:param name="strValue" />
+		<xsl:param name="delimitor" select="','" />
+		<xsl:choose>
+			<xsl:when test="contains($strValue,$delimitor)">
+				<tns:columns>
+					<tns:name>
+						<xsl:value-of select="substring-before($strValue,$delimitor)" />
+					</tns:name>
+					<tns:id>
+						<xsl:value-of select="substring-before($strValue,$delimitor)" />
+					</tns:id>
+					<tns:field>
+						<xsl:value-of select="substring-before($strValue,$delimitor)" />
+					</tns:field>
+				</tns:columns>
+				<xsl:call-template name="commaSeparatorValues">
+					<xsl:with-param name="strValue"
+						select="substring-after($strValue,$delimitor)" />
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<!-- <tns:columns> <tns:name><xsl:value-of select="$strValue"/></tns:name> 
+					<tns:id><xsl:value-of select="$strValue"/></tns:id> <tns:field><xsl:value-of 
+					select="$strValue"/></tns:field> </tns:columns> -->
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+
+
+	<!-- standard copy template -->
+	<xsl:template match="@*|node()">
+		<xsl:copy>
+			<xsl:apply-templates select="@*" />
+			<xsl:apply-templates />
+		</xsl:copy>
+	</xsl:template>
+
+</xsl:stylesheet>

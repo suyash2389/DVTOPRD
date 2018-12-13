@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:reporterInput xmlns:tns="com.ibm.csi.npm.dvreportinput" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com.ibm.csi.npm.dvreportinput input.xsd ">
+  <tns:reporterId>25645</tns:reporterId>
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>GroupTimeSeries1Chart</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>GroupTimeSeries1Mediator</tns:name>
+      <tns:type>timeSeriesMediator</tns:type>
+    </tns:mediator>
+    <tns:title>
+      <tns:name>GroupTimeSeries1Title</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>GroupTimeSeries2Chart</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>GroupTimeSeries2Mediator</tns:name>
+      <tns:type>timeSeriesMediator</tns:type>
+    </tns:mediator>
+    <tns:title>
+      <tns:name>GroupTimeSeries2Title</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>GroupSummary1Table</tns:name>
+      <tns:type>table</tns:type>
+      <tns:adaptor>PVLcGroupSummaryTableAdaptor</tns:adaptor>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>GroupSummary1Mediator</tns:name>
+      <tns:type>gstMediator</tns:type>
+    </tns:mediator>   
+    <tns:title>
+      <tns:name>GroupSummary1Title</tns:name>
+    </tns:title>  
+  </tns:widgetConfigInput>  
+  
+	<tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>GroupSummary2Table</tns:name>
+      <tns:type>table</tns:type>
+      <tns:adaptor>PVLcGroupSummaryTableAdaptor</tns:adaptor>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>GroupSummary2Mediator</tns:name>
+      <tns:type>gstMediator</tns:type>
+    </tns:mediator>   
+    <tns:title>
+      <tns:name>GroupSummary2Title</tns:name>
+    </tns:title>  
+  </tns:widgetConfigInput>  
+  
+</tns:reporterInput>

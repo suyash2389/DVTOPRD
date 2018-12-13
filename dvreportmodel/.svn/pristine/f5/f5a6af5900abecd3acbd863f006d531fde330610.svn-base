@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="com.ibm.csi.npm.dvreportinput" 
+xmlns:tns="com.ibm.csi.npm.dvreportinput" elementFormDefault="qualified">
+
+
+
+    <complexType name="ReporterInput">
+    	<sequence>
+    		<element name="reporterId" type="int"></element>
+    		<element name="widgetConfigInput" type="tns:WidgetConfigInput" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="WidgetConfigInput">
+    	<sequence>
+    		<element name="widget" type="tns:WidgetInput"></element>
+    		<element name="mediator" type="tns:MediatorInput"></element>
+    		<element name="title" type="tns:TitleInput" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="WidgetInput">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="type" type="string"></element>
+    		<element name="adaptor" type="string" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="MediatorInput">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="type" type="string"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="TitleInput">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="reporterInput" type="tns:ReporterInput"></element>
+</schema>

@@ -1,0 +1,375 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.ibm.com/csi/npm/dashjson" 
+xmlns:tns="http://www.ibm.com/csi/npm/dashjson" elementFormDefault="qualified">
+
+    <complexType name="storeType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="query" type="string"></element><!-- new changes - 16th Oct -->
+    		<element name="datasource" type="string"></element>
+    		<element name="default" type="tns:storeDefaultList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="cases" type="tns:caseList" maxOccurs="unbounded" minOccurs="0"></element><!-- new changes - 16th Oct -->
+    		<element name="dvApiStoreCase" type="string" maxOccurs="1" minOccurs="0"></element><!-- new changes - 28th Feb 2018 -->
+    	</sequence>
+    </complexType>
+    <complexType name="caseList">
+    	<sequence>
+    		<element name="default" type="tns:storeDefaultList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="timePeriodLastDay" type="tns:storeDefaultList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="timePeriodToday" type="tns:storeDefaultList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="timePeriodLastMonth" type="tns:storeDefaultList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="timePeriodLastWeek" type="tns:storeDefaultList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="timePeriodLastYear" type="tns:storeDefaultList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="timePeriodCustom" type="tns:storeDefaultList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="timeSpancustom" type="tns:storeDefaultList" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+    <!-- new changes - 16th Oct -->
+	<complexType name="storeDefaultList">
+    	<sequence>
+    		<element name="subElmtID" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="subElmtGrpID" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="timeSpan" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="startTime" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="tz" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="query" type="string" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="filterbarType">
+    	<sequence>
+    		<element name="names" type="string"></element><!-- new changes - 16th Oct -->
+    		<element name="displaynames" type="string"></element><!-- new changes - 16th Oct -->
+    		<element name="drilldown" type="string"></element>
+    		<element name="navigation" type="string"></element><!-- new changes - 16th Oct -->
+    		<element name="toolbarPageId" type="string"></element><!-- new changes - 16th Oct -->
+    		<element name="wherecondition" type="string"></element>
+    		<element name="vendor" type="string"></element>
+    		<element name="region" type="string"></element>
+    		<element name="granularity" type="string"></element>
+    		<element name="dashboardId" type="string"></element>
+    		<element name="icons" type="tns:iconList"></element>
+    		
+    	</sequence>
+    </complexType>
+	<complexType name="iconList">
+    	<sequence>
+    		<element name="startTime" type="tns:filterByList" maxOccurs="1" minOccurs="1"></element>
+    		<element name="tzEndTime" type="tns:filterByList" maxOccurs="1" minOccurs="1"></element>
+    		<element name="timePeriod" type="tns:filterByList" maxOccurs="1" minOccurs="1"></element>
+    		<element name="contextRoot" type="tns:filterByList" maxOccurs="1" minOccurs="1"></element>
+    		<element name="timeSpan" type="tns:filterByList" maxOccurs="1" minOccurs="1"></element>
+    		<element name="timeZone" type="tns:filterByList" maxOccurs="1" minOccurs="1"></element>
+    		<element name="tz" type="tns:filterByList" maxOccurs="1" minOccurs="1"></element>
+    		<element name="endTime" type="tns:filterByList" maxOccurs="1" minOccurs="1"></element>
+    		<element name="tzStartTime" type="tns:filterByList" maxOccurs="1" minOccurs="1"></element>
+    		<element name="Region" type="tns:filterByList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="Interface" type="tns:filterByList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="subElmtID" type="tns:filterByList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="subElmtGrpID" type="tns:filterByList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="unitType" type="tns:unitTypeList" maxOccurs="1" minOccurs="0"></element>
+    		<element name="filterBy" type="tns:filterByList" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+    <complexType name="unitTypeList">
+    	<sequence>
+    		<element name="dependencies" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="storeAndValues" type="tns:storeAndValues" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>	   
+    <complexType name="filterByList">
+    	<sequence>
+    		<element name="dependencies" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="values" type="string"  maxOccurs="1" minOccurs="0"></element>
+    		<element name="defaultValue" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="displayValues" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="showTime" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="valueColumn" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="displayValueColumn" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="hidden" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="store" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="storeAndValues" type="tns:storeAndValues" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+     <complexType name="storeAndValues">
+    	<sequence>
+    		<element name="reportType" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="values" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="level" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="timePeriod" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="timeSpan" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="tzStartTime" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="tzEndTime" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>	
+    		<element name="startTime" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="endTime" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="contextRoot" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="Region" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="displayValues" type="string"></element>
+    		<element name="valueColumn" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="displayValueColumn" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="defaultValue" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="customStore" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="store" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="subElmtGrpID" type="string" maxOccurs="1"
+    			minOccurs="0"></element>
+    		<element name="subElmtID" type="string" maxOccurs="1"
+    			minOccurs="0"></element>
+    	</sequence>
+     </complexType>
+    <!--end of new changes - 16th Oct -->
+    <complexType name="widgettoolbarType">
+    	<sequence>
+    		<element name="isMaster" type="string"></element>
+    		<element name="chartFamily" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="title" type="string"></element>    		
+    		<element name="seriesorder" type="string"></element><!-- new changes - 16th Oct -->
+    		<element name="allSeriesFilter" type="string"></element><!-- new changes - 16th Oct -->
+    		<element name="filterKey" type="string"></element><!-- new changes - 16th Oct -->
+    		<element name="subFilters" type="string"></element><!-- new changes - 16th Oct -->
+    		<element name="seriesAttributes" type="string"></element><!-- new changes - 16th Oct -->
+    		<element name="seriesList" type="tns:toolbarSeriesList"></element><!-- new changes - 16th Oct -->
+    		<element name="showall" type="string"></element>
+    		<element name="navigation" type="string"></element> 
+    	</sequence>
+    </complexType>
+	<!-- new changes - 16th Oct -->
+	 <complexType name="toolbarSeriesList">
+    	<sequence>
+    		<element name="inbound" type="tns:inboundSeriesList" maxOccurs="unbounded" minOccurs="1"></element>
+    		<element name="outbound" type="tns:outboundSeriesList" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    <complexType name="inboundSeriesList">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="reportType" type="string"></element>
+    		<element name="value" type="string"></element>
+    	</sequence>
+    </complexType>
+    <complexType name="outboundSeriesList">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="reportType" type="string"></element>
+    		<element name="value" type="string"></element>
+    	</sequence>
+    </complexType>
+    <!-- end of new changes - 16th Oct -->
+    
+    <complexType name="plotType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="type" type="string"></element>
+    		<element name="gap" type="string"  maxOccurs="1" minOccurs="0"></element>
+    		<element name="minBarSize" type="string"  maxOccurs="1" minOccurs="0"></element>
+    		<element name="maxBarSize" type="string"  maxOccurs="1" minOccurs="0"></element>
+    		<element name="radius" type="string"  maxOccurs="1" minOccurs="0"></element>
+    		<element name="markers" type="string"  maxOccurs="1" minOccurs="0"></element><!-- new changes - 16th Oct -->
+    		<element name="labels" type="string"  maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+   <complexType name="axisType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="title" type="string"></element>
+    		<element name="vertical" type="string" maxOccurs="1" minOccurs="0"></element> 
+    		<element name="titleOrientation" type="string"  maxOccurs="1" minOccurs="0"></element>
+    		<element name="maxLabelCharCount" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="includeZero" type="string"></element>
+    		<element name="minorTicks" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="microTicks" type="string" maxOccurs="1"	minOccurs="0"></element>
+    		<element name="minorLabels" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="labelSeries" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="fixUpper" type="string"  maxOccurs="1" minOccurs="0"></element><!-- new changes - 16th Oct -->
+            <element name="rotation" type="string" maxOccurs="1" minOccurs="0"></element>
+        </sequence>
+    </complexType>
+
+    <complexType name="seriesType">
+    	<sequence>
+    		<element name="name" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="plot" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="store" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="value" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="label" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="sortparam" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="sortorder" type="string" maxOccurs="1" minOccurs="0" default="asc"></element>
+    		<element name="replacevalueparam" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="direction" type="string" maxOccurs="1" minOccurs="0"></element><!-- new changes - 16th Oct -->
+    		<element name="seriesColumn" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="labelColumn" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="labelValue" type="string" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="chartIdentityType">
+    	<sequence>
+    		<element name="name" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="class" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="drilldowntype" type="string" default="navigation"></element>
+    		<element name="type" type="string" ></element>
+    		<element name="parameter" type="string"></element>
+    		<element name="master" type="string" maxOccurs="1" minOccurs="0"></element><!-- new changes - 16th Oct -->
+    		<element name="tooltipText" type="string" maxOccurs="1" minOccurs="0"></element><!-- new changes - 16th Oct -->
+    		<element name="tabTitle" type="string" maxOccurs="1" minOccurs="0"></element><!-- new changes - 16th Oct -->
+    		<element name="extracolumns" type="string" maxOccurs="1" minOccurs="0"></element><!-- new changes - 20 Feb -->
+    		<element name="extraparameters" type="string" maxOccurs="1" minOccurs="0"></element><!-- new changes - 20 Feb -->
+    		<element name="extraparams" type="string" maxOccurs="1" minOccurs="0"></element><!-- new changes - 20 Feb -->
+    		<element name="targetDashboard" type="string" maxOccurs="1" minOccurs="0"></element><!-- new changes - 16th Oct -->
+    		<element name="targetDashboards" type="string" maxOccurs="1" minOccurs="0"></element><!-- new changes - 16th Oct -->
+    	</sequence>
+    </complexType>
+
+    <complexType name="legendType">
+    	<sequence>
+    		<element name="type" type="string" default="interactive"></element>
+    		<element name="style" type="string" default="margin: 0 5px 0 5px;"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="widgetType">
+    	<sequence>
+    		<element name="id" type="string"></element>
+    		<element name="title" type="string" default=""></element>
+    		<element name="type" type="string"></element>
+    		<element name="rowspan" type="string" default="1"></element>
+    		<element name="colspan" type="string" default="1"></element>
+    		<element name="xpos" type="string"></element>
+    		<element name="ypos" type="string"></element>
+    		<element name="toolbar" type="tns:widgettoolbarType"></element>
+    		<element name="style" type="string"
+    			default="height: 160px;width:98.5%;">
+    		
+    		</element>
+    		<element name="dynamicseries" type="string" default="true">	</element>
+    		<!-- <element name="properties" maxOccurs="1" minOccurs="0">
+    			<complexType>
+    				<sequence>
+    					<element name="property" type="tns:propertiesType" maxOccurs="unbounded" minOccurs="1"></element>
+    				</sequence>
+    			</complexType>
+    		</element> -->
+    		<element name="properties" type="tns:propertiesType"></element>
+    		
+    		<element name="columns" type="tns:columnType" maxOccurs="unbounded" minOccurs="1"></element>
+    		<element name="colorRangeId" type="string"
+    			default="tnpm7" maxOccurs="1" minOccurs="0">
+    		</element>
+    		<!-- <element name="plots" maxOccurs="1" minOccurs="0">
+    			<complexType>
+    				<sequence>
+    					<element name="plot" type="tns:plotType" maxOccurs="unbounded" minOccurs="1">	</element>
+    				</sequence>
+    			</complexType>
+    		</element> -->
+    		<element name="plots" type="tns:plotType" maxOccurs="unbounded" minOccurs="1">	</element>
+    		
+    		<!-- <element name="axes" maxOccurs="1" minOccurs="0">
+    			<complexType>
+    				<sequence>
+    					<element name="axis" type="tns:axisType"
+    						maxOccurs="unbounded" minOccurs="1">
+    					</element>
+    				</sequence>
+    			</complexType>
+    		</element> -->
+    		<element name="axes" type="tns:axisType" maxOccurs="unbounded" minOccurs="1"></element>
+    				
+    		<!-- <element name="series" maxOccurs="1" minOccurs="0">
+    			<complexType>
+    				<sequence>
+    					<element name="plotSeries" type="tns:seriesType"
+    						maxOccurs="unbounded" minOccurs="1">
+    					</element>
+
+    				</sequence>
+    			</complexType>
+    		</element> -->
+    		<element name="series" type="tns:seriesType" maxOccurs="unbounded" minOccurs="1"></element>
+    		
+    		<!-- <element name="chartIdentity">
+    			<complexType>
+    				<sequence>
+    					<element name="chartId"
+    						type="tns:chartIdentityType" maxOccurs="unbounded"
+    						minOccurs="1">
+    					</element>
+    				</sequence>
+    			</complexType>
+    		</element> -->
+    		<element name="chartidentity" type="tns:chartIdentityType" maxOccurs="unbounded" minOccurs="1"></element>
+    		
+    		<element name="legend" type="tns:legendType" minOccurs="0"
+    			maxOccurs="1">
+    		</element>
+    		<element name="tooltip" type="string" default="true" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="dashboardType">
+    	<sequence>
+    		<element name="id" type="string" maxOccurs="1" minOccurs="1" default="Dashboard1" ></element>
+    		<element name="title" type="string" maxOccurs="1" minOccurs="1" default="Dashboard1" ></element>
+    		<element name="description" type="string" maxOccurs="1" minOccurs="1" default="Dashboard1"></element>
+    		<element name="blockHeight" type="string" maxOccurs="1" minOccurs="1" default="10"></element>
+    		<element name="bootstrapCols" type="string" maxOccurs="1" minOccurs="1" default="60"></element>
+    		<element name="totalrows" type="string" maxOccurs="1" minOccurs="1" default="2"></element>
+    		<element name="totalcols" type="string" maxOccurs="1" minOccurs="1" default="2"></element>
+    		<element name="localized" type="string" maxOccurs="1" minOccurs="0" default="true"></element>
+    		<element name="stores" type="tns:storeType" maxOccurs="unbounded" minOccurs="1"></element>
+    		<element name="filterbar" type="tns:filterbarType" maxOccurs="1" minOccurs="1"></element>
+    		<element name="widgets" type="tns:widgetType" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="Dashboard" type="tns:dashboardType" nillable="false"></element>
+
+    <complexType name="propertiesType">
+    	<sequence>
+    		<element name="title" type="string"></element>
+    		<element name="primaryKey" type="string"></element>
+    		<element name="dataStore" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="columnType">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    		<element name="id" type="string"></element>
+    		<element name="field" type="string"></element>
+    	</sequence>
+    </complexType>
+</schema>

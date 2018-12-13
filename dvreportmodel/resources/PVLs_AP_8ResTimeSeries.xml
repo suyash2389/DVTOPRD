@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:reporterInput xmlns:tns="com.ibm.csi.npm.dvreportinput" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com.ibm.csi.npm.dvreportinput input.xsd ">
+  <tns:reporterId>10295</tns:reporterId>
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>ResTimeSeries1Chart</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>ResTimeSeries1Mediator</tns:name>
+      <tns:type>timeSeriesMediator</tns:type>
+    </tns:mediator>
+    <tns:title>
+      <tns:name>ResTimeSeries1Title</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>ResTimeSeries2Chart</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>ResTimeSeries2Mediator</tns:name>
+      <tns:type>timeSeriesMediator</tns:type>
+    </tns:mediator>
+    <tns:title>
+      <tns:name>ResTimeSeries2Title</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>ResTimeSeries3Chart</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>ResTimeSeries3Mediator</tns:name>
+      <tns:type>timeSeriesMediator</tns:type>
+    </tns:mediator>
+    <tns:title>
+      <tns:name>ResTimeSeries3Title</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>ResTimeSeries4Chart</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>ResTimeSeries4Mediator</tns:name>
+      <tns:type>timeSeriesMediator</tns:type>
+    </tns:mediator>
+    <tns:title>
+      <tns:name>ResTimeSeries4Title</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+  
+</tns:reporterInput>

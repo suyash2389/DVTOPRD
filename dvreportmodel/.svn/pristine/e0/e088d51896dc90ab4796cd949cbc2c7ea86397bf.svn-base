@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReporterInput>
+	<ReporterID></ReporterID>
+	<pageControl>
+		<Widget>
+			<Name></Name>
+			<Type></Type>
+			<Adapor></Adapor>
+		</Widget>
+		<Title>			
+			<name></name>
+		</Title>
+		<Mediator>
+			<Name></Name>		
+		</Mediator>	
+	</pageControl>
+	<pageControl>
+		<Widget>
+			<Name></Name>
+			<Type></Type>
+			<Adapor></Adapor>
+		</Widget>
+		<Title>			
+			<name></name>
+		</Title>
+		<Mediator>
+			<Name></Name>		
+		</Mediator>	
+	</pageControl>
+</ReporterInput>

@@ -1,0 +1,231 @@
+{
+    "id": "Dashboard",
+    "title": "Dashboard",
+    "description": "Dashboard Details",
+    "totalrows": "2",
+    "totalcols": "2",
+    "stores": [
+        {
+            "name": "widget1Store"
+        },
+        {
+            "name": "widget2Store"
+        },
+        {
+            "name": "widget3Store"
+        }
+    ],
+    "filterbar": {
+        "drilldown": "true",
+        "wherecondition": "",
+        "vendor": "y",
+        "region": "y",
+        "granularity": "y"
+    },
+    "widgets": [
+        {
+            "id": "widget1",
+            "type": "Column",
+            "rowspan": "1",
+            "colspan": "1",
+            "xpos": "0",
+            "ypos": "0",
+            "toolbar": {
+                "isMaster": "true",
+                "chartFamily": "graphical",
+                "title": "Widget 1 Title"
+            },
+            "style": "height: 160px;width:98.5%;",
+            "colorRangeId": "tnpm7",
+            "plots": [
+                {
+                    "name": "default",
+                    "type": "StackedColumns",
+                    "gap": "3",
+                    "minBarSize": "3",
+                    "maxBarSize": "20"
+                }
+            ],
+            "axes": [
+                {
+                    "name": "x",
+                    "title": "eNodeB",
+                    "titleOrientation": "away",
+                    "maxLabelCharCount": "15",
+                    "includeZero": "true",
+                    "minorTicks": "false",
+                    "microTicks": "false",
+                    "labelSeries": "Attempts"
+                },
+                {
+                    "name": "y",
+                    "title": "Number",
+                    "vertical": "true",
+                    "includeZero": "true",
+                    "fixUpper": "major",
+                    "minorTicks": "false",
+                    "minorLabels": "false",
+                    "microTicks": "false"
+                }
+            ],
+            "series": [
+                {
+                    "name": "Attempts",
+                    "plot": "default",
+                    "store": "widget1Store",
+                    "value": "item.value1",
+                    "label": "item.enodeb"
+                },
+                {
+                    "name": "Success",
+                    "plot": "default",
+                    "store": "widget1Store",
+                    "value": "item.value2"
+                },
+                {
+                    "name": "Failure",
+                    "plot": "default",
+                    "store": "widget1Store",
+                    "value": "item.value3"
+                }
+            ],
+            "chartidentity": [
+                {
+                    "name": "widget1",
+                    "drilldowntype": "masterlistener",
+                    "type": "master",
+                    "parameter": "enodeb"
+                }
+            ],
+            "legend": {
+                "type": "interactive",
+                "style": "margin: 0 5px 0 5px;"
+            },
+            "tooltip": "true"
+        },
+        {
+            "id": "widget2",
+            "type": "Column",
+            "rowspan": "1",
+            "colspan": "1",
+            "xpos": "1",
+            "ypos": "0",
+            "toolbar": {
+                "isMaster": "true",
+                "chartFamily": "graphical",
+                "title": "Widget 2 Title"
+            },
+            "style": "height: 160px;width:98.5%;",
+            "colorRangeId": "tnpm7",
+            "plots": [
+                {
+                    "name": "default",
+                    "type": "StackedColumns",
+                    "gap": "3",
+                    "minBarSize": "3",
+                    "maxBarSize": "20"
+                }
+            ],
+            "axes": [
+                {
+                    "name": "x",
+                    "title": "eNodeB",
+                    "titleOrientation": "away",
+                    "maxLabelCharCount": "15",
+                    "includeZero": "true",
+                    "minorTicks": "false",
+                    "microTicks": "false",
+                    "labelSeries": "Attempts"
+                },
+                {
+                    "name": "y",
+                    "title": "Number",
+                    "vertical": "true",
+                    "includeZero": "true",
+                    "fixUpper": "major",
+                    "minorTicks": "false",
+                    "minorLabels": "false",
+                    "microTicks": "false"
+                }
+            ],
+            "series": [
+                {
+                    "name": "Attempts",
+                    "plot": "default",
+                    "store": "widget2Store",
+                    "value": "item.value1",
+                    "label": "item.enodeb"
+                },
+                {
+                    "name": "Success",
+                    "plot": "default",
+                    "store": "widget2Store",
+                    "value": "item.value2"
+                },
+                {
+                    "name": "Failure",
+                    "plot": "default",
+                    "store": "widget2Store",
+                    "value": "item.value3"
+                }
+            ],
+            "chartidentity": [
+                {
+                    "name": "widget2",
+                    "drilldowntype": "masterlistener",
+                    "type": "master",
+                    "parameter": "enodeb"
+                }
+            ],
+            "legend": {
+                "type": "interactive",
+                "style": "margin: 0 5px 0 5px;"
+            },
+            "tooltip": "true"
+        },
+        {
+            "id": "widget3",
+            "type": "Grid",
+            "rowspan": "1",
+            "colspan": "1",
+            "xpos": "0",
+            "ypos": "1",
+            "toolbar": {
+                "isMaster": "false",
+                "title": "Widget 3 Title"
+            },
+            "style": "height: 300px;",
+            "properties": {
+                "title": "",
+                "primaryKey": "region",
+                "dataStore": "widget3Store"
+            },
+            "columns": [
+                {
+                    "name": "Column 1 Name",
+                    "id": "Column_1_ID",
+                    "field": "Column_1_Mapping"
+                },
+                {
+                    "name": "Column 2 Name",
+                    "id": "Column_2_ID",
+                    "field": "Column_2_Mapping"
+                },
+                {
+                    "name": "Column 3 Name",
+                    "id": "Column_3_ID",
+                    "field": "Column_3_Mapping"
+                }
+            ],
+            "chartidentity": [
+                {
+                    "class": "grid",
+                    "drilldowntype": "master",
+                    "type": "listener",
+                    "parameter": "drildownParam",
+                    "master": "widget1"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:reporterInput xmlns:tns="com.ibm.csi.npm.dvreportinput" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="com.ibm.csi.npm.dvreportinput input.xsd ">
+  <tns:reporterId>10291</tns:reporterId>
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>TopNTable1</tns:name>
+      <tns:type>table</tns:type>
+      <tns:adaptor>PVLcSummaryTableAdaptor</tns:adaptor>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>TopNMediator1</tns:name>
+      <tns:type>topnMediator</tns:type>
+    </tns:mediator>
+    <tns:title>
+      <tns:name>TopNTableTitle1</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+    
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>TopNTable2</tns:name>
+      <tns:type>table</tns:type>
+      <tns:adaptor>PVLcSummaryTableAdaptor</tns:adaptor>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>TopNMediator2</tns:name>
+      <tns:type>topnMediator</tns:type>
+    </tns:mediator>
+    <tns:title>
+      <tns:name>TopNTableTitle2</tns:name>
+    </tns:title>
+  </tns:widgetConfigInput>
+  
+  <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>DCChart</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>DCChartMediator</tns:name>
+      <tns:type>Mediator</tns:type>
+    </tns:mediator>
+  </tns:widgetConfigInput>
+  
+   <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>DCChart</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>DCChartMediator</tns:name>
+      <tns:type>Mediator</tns:type>
+    </tns:mediator>
+  </tns:widgetConfigInput>
+  
+   <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>DCChart1</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>DCChartMediator1</tns:name>
+      <tns:type>Mediator</tns:type>
+    </tns:mediator>
+  </tns:widgetConfigInput>
+  
+   <tns:widgetConfigInput>
+    <tns:widget>
+      <tns:name>DCChart2</tns:name>
+      <tns:type>chart</tns:type>
+    </tns:widget>
+    <tns:mediator>
+      <tns:name>DCChartMediator2</tns:name>
+      <tns:type>Mediator</tns:type>
+    </tns:mediator>
+  </tns:widgetConfigInput>
+  
+  
+  
+  
+</tns:reporterInput>

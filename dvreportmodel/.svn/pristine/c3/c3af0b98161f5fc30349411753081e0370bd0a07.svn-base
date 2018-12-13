@@ -1,0 +1,84 @@
+package com.ibm.csi.npm.dvreportmodel.util;
+
+public class Constant {
+	public static final String RESOURCE_DISTRIB_MEDIATOR ="resourceDistributionMediator";
+	public static final String GST_MEDIATOR ="gstMediator";
+	public static final String RST_MEDIATOR ="rstMediator";
+	public static final String TIME_SERIES_MEDIATOR="timeSeriesMediator";
+	public static final String RATIO_MEDIATOR="ratioMediator";
+	public static final String TOPN_MEDIATOR="topnMediator";
+	public static final String RTT_MEDIATOR="rttMediator";
+	public static final String RANK_VARIATION_MEDIATOR="rankVariationMediator";
+	public static final String BASELINE_MEDIATOR="baselineMediator";
+	//special case here we map class name instead of tag name
+	public static final String MATRIX_MEDIATOR="MatrixMediator";
+	public static final String RPT_MEDIATOR ="rptMediator";
+	
+	public static final String PVLC_GROUP_SUMMARY_TABLE_ADAPTOR ="PVLcGroupSummaryTableAdaptor";
+	public static final String PVLC_RESOURCE_SUMMARY_TABLE_ADAPTOR ="PVLcResourceSummaryTableAdaptor";
+	public static final String PVLC_SUMMARY_TABLE_ADAPTOR ="PVLcSummaryTableAdaptor";
+	public static final String PVLC_RESOURCE_TH_TABLE_ADAPTOR ="PVLcResourceOverThrTableAdaptor";
+	public static final String DV_RANK_VARIATION_TABLE_ADAPTOR ="DVRankVariationTableAdaptor";
+	public static final String MATRIX_TABLE_ADAPTOR ="MatrixAdaptor";
+	public static final String DV_RESOURCE_PLANNING_TABLE_ADAPTOR ="DVResourcePlanningTableAdaptor";
+	
+	public static final int IDX_IND = 0;
+	public static final int STR_NAME = 1;
+	public static final int STR_URL = 2;
+	
+	public static final String PIE = "PIE";
+	public static final String AREA = "AREA";
+	public static final String STACK_BAR = "STACK_BAR";
+	public static final String BAR = "BAR";
+	public static final String STACK_BAR_HORIZ = "STACK_BAR_HORIZ";
+	public static final String BAR_HORIZ = "BAR_HORIZ";
+	public static final String RV_CHART = "RV_CHART";
+	public static final String BASELINE_CHART = "BASELINE_CHART";
+	public static final String DISTRIBUTION_BAR = "DISTRIBUTION_BAR";
+	public static final String STACK_AREA = "STACK_AREA";
+	
+	public static final String BASE_URL = "/PV/PROVISO/DataView/Query.json?subElmtID={subElmtID}"
+			+ "&subElmtGrpID={subElmtGrpID}&timeSpan={timeSpan}&relativePeriod=timeparam&reporterID={reporterID}&startTime={startTime}"
+			+ "&user=NOC&gr=true&gdm=true&tz={tz}&convertTime=true"; 
+	
+	public static final String TS_BASE_URL = "/PV/PROVISO/DataView/Query.json?subElmtIDs={subElmtID}"
+			+ "&subElmtGrpID={subElmtGrpID}&timeSpan={timeSpan}&relativePeriod=timeparam&reporterID={reporterID}&startTime={startTime}"
+			+ "&user=NOC&gr=true&gdm=true&tz={tz}&convertTime=true"; 
+	
+	public static final String RESOURCE_DISTRIB_MEDIATOR_QUERY=BASE_URL+"&queryType=DVResDistribution&resLabelID=2&"
+			+ "metricID={metricID}&statistic={statistic}&allRanges={allRanges}{ranges}";
+	
+	public static final String GST_MEDIATOR_QUERY=BASE_URL+"&queryType=DVGST&resLabelID=2&"
+			+ "metricIDs={metricIDs}{statistics}&violationType=true&Burst=true&Period=true&Risk=true&Baseline=true&removeNullRows={removeNullRows}"
+			+ "&sortByColumn={sortByColumn}&rank={rank}";
+	
+	public static final String RST_MEDIATOR_QUERY=BASE_URL+"&queryType=DVRSTProperty&resLabelID=2&"
+			+ "metricIDs={metricIDs}{statistics}&propertyIDs={propertyIDs}&removeNullRows={removeNullRows}"
+			+ "{sortByColumn}&rank={rank}";
+	
+	public static final String TIME_SERIES_MEDIATOR_QUERY=TS_BASE_URL+"&queryType=DVTSProperty&resLabelID=1&"
+			+ "metricIDs={metricIDs}&propertyIDs={propertyIDs}&statistics={statistics}&requireThr={requireThr}&ga={ga}&AddNRTtoGTS={AddNRTtoGTS}"
+			+ "&nrtWait={nrtWait}&autoSP={autoSP}{busyHours}";
+	
+	public static final String TOPN_MEDIATOR_QUERY=BASE_URL+"&queryType=DVTopNProperty&resLabelID=2&metricIDs={metricIDs}{propertyIDs}"
+			+ "&statistics={statistics}&maxResults={maxResults}&ga=false&metricTopN={metricTopN}&rank={rank}&handleRSE={handleRSE}";
+	
+	public static final String RATIO_MEDIATOR_QUERY=BASE_URL+"&queryType=DVRatioMetric&resLabelID=2&metricIDs={metricIDs}&ratiotoReport={ratiotoReport}&ga={ga}";
+	
+	public static final String RTT_MEDIATOR_QUERY=BASE_URL+"&queryType=DVRTTBurst&resLabelID=2&metricIDs={metricIDs}&statistics={statistics}&propertyIDs={propertyIDs}"
+			+ "&sortByColumn={sortByColumn}&rank={rank}";
+		
+	public static final String RANK_VARIATION_MEDIATOR_QUERY=BASE_URL+"queryType=DVTopNVariation&resLabelID=2&metricIDs={metricIDs}&statistic={statistics}"
+			+ "&maxResults={maxResults}&rank={rank}";
+	
+	public static final String BASELINE_MEDIATOR_QUERY=BASE_URL
+			+"&queryType=DVBaseline&resLabelID=1771&baselinePeriods={baselinePeriods}&metricIDs=={metricIDs}&baselineStats={baselineStats}&statistics={statistics}";
+	
+	public static final String MATRIX_MEDIATOR_QUERY = BASE_URL+"&queryType=DVMetricMatrixSummary&resLabelID=1771&propConstraints={propConstraints}"
+			+ "&sourceEndpoint={sourceEndpoint}&destinationEndpoint={destinationEndpoint}&sourceEndpointLabel={sourceEndpointLabel}"
+			+ "&destinationEndpointLabel={destinationEndpointLabel}&metricIDs={metricIDs}{statistics}";
+	
+	public static final String RPT_MEDIATOR_QUERY=BASE_URL+"&queryType=DVRPT&resLabelID=1771&metricIDs={metricIDs}&statistics={statistics}&propertyIDs={propertyIDs}"
+			+ "&sortByColumn={sortByColumn}&rank={rank}&plevelDef={plevelDef}&trendDateLowerLimit={trendDateLowerLimit}&trendDateUpperLimit={trendDateUpperLimit}"
+			+ "&trendPeriod={trendPeriod}&trendType={trendType}";
+}
